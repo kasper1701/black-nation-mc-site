@@ -1,0 +1,348 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #000;
+  color: #C8C8C8;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: 120px; /* space for fixed footer */
+}
+
+/* STRONGER, VISIBLE MOVING BLUE FOG BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(0, 20, 140, 0.22), transparent 60%),
+    radial-gradient(circle at 75% 80%, rgba(0, 20, 140, 0.18), transparent 65%),
+    radial-gradient(circle at 50% 50%, rgba(0, 20, 140, 0.12), transparent 70%);
+  animation: fogMove 22s ease-in-out infinite alternate;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+@keyframes fogMove {
+  from { transform: translateY(0px) translateX(0px); }
+  to   { transform: translateY(-35px) translateX(35px); }
+}
+
+/* PAGE FADE ANIMATION */
+.fade-page {
+  opacity: 0;
+  transition: opacity .25s ease-in-out;
+}
+
+.fade-page.fade-in {
+  opacity: 1;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 30px 10px 10px;
+}
+
+/* LOGO WITH GLOW + BREATHING + TILT */
+.logo {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 10px;
+
+  filter: drop-shadow(0 0 18px rgba(0, 20, 140, 0.55))
+          drop-shadow(0 0 28px rgba(0, 20, 140, 0.35));
+
+  animation: breathe 6s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.logo:hover {
+  transform: rotate(3deg);
+}
+
+@keyframes breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+.header h1 {
+  font-size: 42px;
+  color: #fff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.motto {
+  font-size: 20px;
+  margin-top: 4px;
+  color: #00148C;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* NAVIGATION */
+.nav {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 20, 140, 0.4);
+}
+
+.nav a.active {
+  color: #fff;
+  border: 1px solid #00148C;
+  box-shadow: 0 0 12px rgba(0, 20, 140, 0.6);
+}
+
+/* MEMBERS VAULT HIGHLIGHT */
+.vault-highlight {
+  color: #00148C !important;
+  font-weight: bold;
+  border: 1px solid #00148C;
+  box-shadow: 0 0 12px rgba(0, 20, 140, 0.6);
+}
+
+/* HERO SECTION */
+.hero {
+  width: 100%;
+  padding: 28px 20px;
+  background: rgba(17, 17, 17, 0.95);
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+.hero h3 {
+  color: #fff;
+  font-size: 22px;
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+
+.hero p {
+  font-size: 15px;
+}
+
+/* SECTIONS */
+.section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 30px 20px;
+  background: rgba(17, 17, 17, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 0 16px rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+.section h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+/* GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 20, 140, 0.6);
+}
+
+/* TEXT LISTS */
+.text-list {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* MEMBERS VAULT */
+.vault-box {
+  max-width: 400px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+.vault-box h2 {
+  font-size: 26px;
+  color: #00148C;
+  font-weight: bold;
+}
+
+.vault-box input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  border: 1px solid #2A2A2A;
+  background: #000;
+  color: #fff;
+}
+
+.vault-box button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 6px;
+  background: #00148C;
+  border: 1px solid #00148C;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.vault-box button:hover {
+  box-shadow: 0 0 14px rgba(0, 20, 140, 0.7);
+}
+
+.vault-msg {
+  margin-top: 10px;
+  font-size: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ROSTER */
+.roster-section {
+  text-align: center;
+}
+
+.roster-large {
+  margin-bottom: 18px;
+}
+
+.roster-large img {
+  width: 100%;
+  max-width: 750px;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.9);
+}
+
+.roster-large p {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+/* PROPERTIES */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.property-grid img {
+  width: 100%;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+.property-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 20, 140, 0.6);
+}
+
+/* FOOTER (FIXED + FADE IN + PATCH ICON) */
+.footer {
+  width: 100%;
+  padding: 25px 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #888;
+  background: rgba(0,0,0,0.65);
+  border-top: 1px solid rgba(0, 20, 140, 0.3);
+  backdrop-filter: blur(4px);
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  animation: footerFade 1.2s ease-in-out forwards;
+}
+
+@keyframes footerFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer p img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.footer .disclaimer {
+  margin-top: 6px;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .gallery-grid,
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid,
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .motto {
+    font-size: 16px;
+  }
+}
