@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Members Vault — Black Nation MC</title>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
-
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
   <script src="js/vault.js" defer></script>
@@ -15,11 +13,18 @@
 <body class="fade-page">
 
 <header class="header">
-  <a href="index.html">
-  <img src="assets/images/blacknationlogo.png" class="logo">
-</a>
-  <h1>BLACK NATION MC</h1>
-  <h2 class="motto">BLACK FUCKEN NATION!</h2>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <img src="assets/images/blacknationlogo.png" class="logo" alt="Black Nation MC logo">
+    </a>
+    <div class="title-block">
+      <h1>BLACK NATION MC</h1>
+      <h2 class="motto">BLACK FUCKEN NATION!</h2>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 
   <nav class="nav">
     <a href="index.html">Home</a>
@@ -34,9 +39,11 @@
 
 <div id="gate" class="section vault-box">
   <h2>MEMBERS VAULT</h2>
-  <p class="muted">Members only.</p>
-  <input type="password" id="pass" placeholder="Access code">
-  <button onclick="unlock()">Unlock</button>
+  <p class="muted">Secure access only. No sharing codes. No screenshots.</p>
+  <div class="vault-input-wrap">
+    <input type="password" id="pass" placeholder="Access code">
+    <button onclick="unlock()">Unlock</button>
+  </div>
   <p id="msg" class="vault-msg"></p>
 </div>
 
@@ -46,54 +53,127 @@
   <h3>ROSTER</h3>
 
   <div class="roster-large">
-    <img src="assets/images/roster1.jpg">
-    <p></p>
+    <img src="assets/images/roster1.jpg" alt="Black Nation roster 1">
   </div>
 
   <div class="roster-large">
-    <img src="assets/images/roster2.jpg">
-    <p></p>
+    <img src="assets/images/roster2.jpg" alt="Black Nation roster 2">
   </div>
-
 </section>
 
 <section class="section">
   <h3>MEMBERS</h3>
-  <div class="text-list">
-    <p><b>Daquavion Rangateti</b> — President — 022 764 0431</p>
-    <p><b>Denero Rangateti</b> — Vice President — 021 344 0513</p>
-    <p><b>Weston Kopara</b> — SGT of Arms — (insert)</p>
-    <p><b>Danehura Rangateti</b> — Treasurer — 022 990 0359</p>
-    <p><b>Rangi Tatoe</b> — Road Captain — 021 148 2254</p>
-    <p><b>Queenie Rangateti</b> — Queen — 022 990 0359</p>
-    <p><b>Rayy Ping</b> — Life Member — 027 308 1383</p>
-    <p><b>Uncle Rangi</b> — Life Member — (insert)</p>
-    <p><b>Tama TeRangi</b> — Life Member — 022 708 7922</p>
-    <p><b>Wiremu Kaimoana</b> — Member — 027 490 1777</p>
-    <p><b>TeAroha Rangimiri</b> — Prospect — 021 206 9288</p>
-    <p><b>Tui TeRangi</b> — Prospect — 027 215 3803</p>
-    <p><b>Dum Fucq</b> — Prospect — (insert)</p>
-    <p><b>Hemi Pareha</b> — Prospect — 027 091 2342</p>
-    <p><b>Rawiri Tatoe</b> — Prospect — (insert)</p>
-    <p><b>HemiRangi Tewhamatu</b> — Prospect — 020 376 3681</p>
+  <div class="members-grid">
+    <div class="member-card">
+      <p><b>Daquavion Rangateti</b></p>
+      <p>President</p>
+      <p>022 764 0431</p>
+    </div>
+    <div class="member-card">
+      <p><b>Denero Rangateti</b></p>
+      <p>Vice President</p>
+      <p>021 344 0513</p>
+    </div>
+    <div class="member-card">
+      <p><b>Weston Kopara</b></p>
+      <p>SGT of Arms</p>
+      <p>(insert)</p>
+    </div>
+    <div class="member-card">
+      <p><b>Danehura Rangateti</b></p>
+      <p>Treasurer</p>
+      <p>022 990 0359</p>
+    </div>
+    <div class="member-card">
+      <p><b>Rangi Tatoe</b></p>
+      <p>Road Captain</p>
+      <p>021 148 2254</p>
+    </div>
+    <div class="member-card">
+      <p><b>Queenie Rangateti</b></p>
+      <p>Queen</p>
+      <p>022 990 0359</p>
+    </div>
+    <div class="member-card">
+      <p><b>Rayy Ping</b></p>
+      <p>Life Member</p>
+      <p>027 308 1383</p>
+    </div>
+    <div class="member-card">
+      <p><b>Uncle Rangi</b></p>
+      <p>Life Member</p>
+      <p>(insert)</p>
+    </div>
+    <div class="member-card">
+      <p><b>Tama TeRangi</b></p>
+      <p>Life Member</p>
+      <p>022 708 7922</p>
+    </div>
+    <div class="member-card">
+      <p><b>Wiremu Kaimoana</b></p>
+      <p>Member</p>
+      <p>027 490 1777</p>
+    </div>
+    <div class="member-card">
+      <p><b>TeAroha Rangimiri</b></p>
+      <p>Prospect</p>
+      <p>021 206 9288</p>
+    </div>
+    <div class="member-card">
+      <p><b>Tui TeRangi</b></p>
+      <p>Prospect</p>
+      <p>027 215 3803</p>
+    </div>
+    <div class="member-card">
+      <p><b>Dum Fucq</b></p>
+      <p>Prospect</p>
+      <p>(insert)</p>
+    </div>
+    <div class="member-card">
+      <p><b>Hemi Pareha</b></p>
+      <p>Prospect</p>
+      <p>027 091 2342</p>
+    </div>
+    <div class="member-card">
+      <p><b>Rawiri Tatoe</b></p>
+      <p>Prospect</p>
+      <p>(insert)</p>
+    </div>
+    <div class="member-card">
+      <p><b>HemiRangi Tewhamatu</b></p>
+      <p>Prospect</p>
+      <p>020 376 3681</p>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <h3>RADIO FREQUENCY</h3>
-  <p style="font-size:18px; color:#00148C; font-weight:bold;">
-    Radio Channel:<br>
-    <span style="color:white;">23.23</span>
+  <p class="radio-readout">
+    <span class="radio-label">Radio Channel</span>
+    <span class="radio-value">23.23</span>
   </p>
 </section>
 
 <section class="section">
   <h3>PROPERTIES</h3>
   <div class="property-grid">
-    <div><img src="assets/images/property1.jpg"><p>Safehouse Alpha</p></div>
-    <div><img src="assets/images/property2.jpg"><p>Garage Base</p></div>
-    <div><img src="assets/images/property3.jpg"><p>Meeting Point</p></div>
-    <div><img src="assets/images/property4.jpg"><p>Storage Facility</p></div>
+    <div class="property-card">
+      <img src="assets/images/property1.jpg" alt="Safehouse Alpha">
+      <p>Safehouse Alpha</p>
+    </div>
+    <div class="property-card">
+      <img src="assets/images/property2.jpg" alt="Garage Base">
+      <p>Garage Base</p>
+    </div>
+    <div class="property-card">
+      <img src="assets/images/property3.jpg" alt="Meeting Point">
+      <p>Meeting Point</p>
+    </div>
+    <div class="property-card">
+      <img src="assets/images/property4.jpg" alt="Storage Facility">
+      <p>Storage Facility</p>
+    </div>
   </div>
 </section>
 
@@ -103,7 +183,7 @@
 
 <footer class="footer">
   <p>
-    <img src="assets/images/blacknationlogo.png">
+    <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo small">
     BLACK NATION MC — EST 2025
   </p>
   <p class="disclaimer"><b>ALL MADE FOR ROLEPLAY PURPOSES AND IS NOT REAL</b></p>
