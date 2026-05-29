@@ -1023,3 +1023,46 @@ filter:
   display: block !important;
   max-width: 100% !important;
 }
+
+/* MOBILE FIX FOR PROFILE SLIDER */
+@media (max-width: 900px) {
+  .profile-viewer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profile-layout {
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .pfp-large {
+    width: 80%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+  }
+
+  .profile-info {
+    width: 90%;
+    text-align: center;
+  }
+
+  .profile-name {
+    font-size: 28px;
+  }
+
+  .profile-rank {
+    font-size: 20px;
+  }
+
+  .profile-phone {
+    font-size: 18px;
+  }
+
+  .arrow {
+    font-size: 40px;
+  }
+}
