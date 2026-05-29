@@ -908,3 +908,110 @@ filter:
     drop-shadow(0 0 30px rgba(0, 20, 140, 0.75))
     drop-shadow(0 0 60px rgba(0, 20, 140, 0.45));
 }
+
+/* PROFILE SLIDER — PERFECT SYMMETRY */
+.profile-slider {
+  text-align: center;
+}
+
+.profile-viewer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px; /* wider for symmetry */
+  margin-top: 30px;
+}
+
+/* LOCKED LEFT + RIGHT POSITIONS */
+.profile-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  width: 900px; /* fixed width so nothing moves */
+  margin: 0 auto;
+}
+
+/* TALLER + FIXED PHOTO SIZE */
+.pfp-large {
+  width: 360px;
+  height: 480px; /* tall + consistent */
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 0 40px rgba(0, 20, 140, 0.55);
+  flex-shrink: 0; /* prevents resizing */
+}
+
+/* RIGHT SIDE INFO — FIXED WIDTH SO IT NEVER MOVES */
+.profile-info {
+  text-align: left;
+  width: 360px; /* EXACT same width as photo for symmetry */
+  min-height: 200px; /* prevents shifting when text changes */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* BIGGER TEXT */
+.profile-name {
+  font-size: 40px;
+  color: var(--text-strong);
+  margin-bottom: 12px;
+}
+
+.profile-rank {
+  font-size: 26px;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+
+.profile-phone {
+  font-size: 22px;
+  color: var(--text);
+}
+
+/* ARROWS */
+.arrow {
+  background: transparent;
+  border: none;
+  color: var(--blue);
+  font-size: 60px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.arrow:hover {
+  color: var(--text-strong);
+  text-shadow: 0 0 20px rgba(0, 20, 140, 0.8);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .profile-layout {
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+  }
+
+  .pfp-large {
+    width: 280px;
+    height: 360px;
+  }
+
+  .profile-info {
+    width: 280px;
+    text-align: center;
+  }
+
+  .profile-name {
+    font-size: 30px;
+  }
+
+  .profile-rank {
+    font-size: 22px;
+  }
+
+  .profile-phone {
+    font-size: 20px;
+  }
+}
