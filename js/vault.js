@@ -43,6 +43,7 @@ let rankIndex = 0;
 
 function updateRankViewer() {
   const p = rankProfiles[rankIndex];
+
   document.getElementById("rank-pfp").src = "assets/images/" + p.pfp;
   document.getElementById("rank-name").innerHTML = "<b>" + p.name + "</b>";
   document.getElementById("rank-role").textContent = p.role;
@@ -58,3 +59,7 @@ function prevProfile() {
   rankIndex = (rankIndex - 1 + rankProfiles.length) % rankProfiles.length;
   updateRankViewer();
 }
+
+/* ⭐ REQUIRED FIX: make functions global so HTML buttons can call them */
+window.nextProfile = nextProfile;
+window.prevProfile = prevProfile;
