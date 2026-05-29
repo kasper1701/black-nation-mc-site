@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Members Vault — Black Nation MC</title>
 
+
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="css/style.css?v=10">
   <script src="js/transition.js" defer></script>
   <script src="js/vault.js" defer></script>
 </head>
 <body class="fade-page">
+
 
 <header class="header">
   <div class="header-inner">
@@ -26,6 +28,7 @@
     </button>
   </div>
 
+
   <nav class="nav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -35,7 +38,9 @@
   </nav>
 </header>
 
+
 <main>
+
 
 <div id="gate" class="section vault-box">
   <h2>MEMBERS VAULT</h2>
@@ -47,30 +52,40 @@
   <p id="msg" class="vault-msg"></p>
 </div>
 
+
 <div id="vault" style="display:none;">
+
 
 <section class="section roster-section">
   <h3>ROSTER</h3>
 
+
   <div class="roster-large">
     <img src="assets/images/roster1.jpg" alt="Black Nation roster 1">
   </div>
+
 
   <div class="roster-large">
     <img src="assets/images/roster2.jpg" alt="Black Nation roster 2">
   </div>
 </section>
 
+
 <section class="section profile-slider">
   <h3>MEMBER VIEWER</h3>
 
+
   <div class="profile-viewer">
+
 
     <button class="arrow left" onclick="prevProfile()">&#10094;</button>
 
+
     <div class="profile-layout">
 
+
       <img id="vault-pfp" src="assets/images/pfp1.png" class="pfp-large">
+
 
       <div class="profile-info">
         <p id="vault-name" class="profile-name"><b>Daquavion Rangateti</b></p>
@@ -78,12 +93,16 @@
         <p id="vault-phone" class="profile-phone">022 764 0431</p>
       </div>
 
+
     </div>
+
 
     <button class="arrow right" onclick="nextProfile()">&#10095;</button>
 
+
   </div>
 </section>
+
 
 <section class="section">
   <h3>MEMBERS</h3>
@@ -107,6 +126,7 @@
   </div>
 </section>
 
+
 <section class="section">
   <h3>RADIO FREQUENCY</h3>
   <p class="radio-readout">
@@ -114,6 +134,7 @@
     <span class="radio-value">23.23</span>
   </p>
 </section>
+
 
 <section class="section">
   <h3>PROPERTIES</h3>
@@ -125,9 +146,12 @@
   </div>
 </section>
 
+
 </div>
 
+
 </main>
+
 
 <footer class="footer">
   <p>
@@ -137,6 +161,7 @@
   <p class="disclaimer"><b>This content is entirely fictional and created for roleplay purposes only.</b></p>
 </footer>
 
+
 <script>
 function unlock() {
   const pass = document.getElementById("pass");
@@ -144,9 +169,11 @@ function unlock() {
   const gate = document.getElementById("gate");
   const vault = document.getElementById("vault");
 
+
   if (pass.value === "bfkn23") {
     msg.innerText = "ACCESS GRANTED";
     msg.style.color = "lime";
+
 
     setTimeout(() => {
       gate.style.display = "none";
@@ -154,11 +181,13 @@ function unlock() {
       updateVaultProfile();
     }, 300);
 
+
   } else {
     msg.innerText = "INCORRECT CODE";
     msg.style.color = "red";
   }
 }
+
 
 const vaultProfiles = [
   { pfp: "pfp1.png", name: "Daquavion Rangateti", rank: "President", phone: "022 764 0431" },
@@ -179,7 +208,9 @@ const vaultProfiles = [
   { pfp: "pfp16.png", name: "HemiRangi Tewhamatu", rank: "Prospect", phone: "020 376 3681" }
 ];
 
+
 let vaultIndex = 0;
+
 
 function updateVaultProfile() {
   document.getElementById("vault-pfp").src = "assets/images/" + vaultProfiles[vaultIndex].pfp;
@@ -188,15 +219,18 @@ function updateVaultProfile() {
   document.getElementById("vault-phone").textContent = vaultProfiles[vaultIndex].phone;
 }
 
+
 function nextProfile() {
   vaultIndex = (vaultIndex + 1) % vaultProfiles.length;
   updateVaultProfile();
 }
 
+
 function prevProfile() {
   vaultIndex = (vaultIndex - 1 + vaultProfiles.length) % vaultProfiles.length;
   updateVaultProfile();
 }
+
 
 document.addEventListener("keydown", (e) => {
   if (document.getElementById("vault").style.display !== "none") {
@@ -205,6 +239,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 </script>
+
 
 </body>
 </html>

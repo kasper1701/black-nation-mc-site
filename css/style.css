@@ -1065,172 +1065,139 @@ filter:
     border-radius: 10px;
   }
 
-  /* Profile slider layout */
-  .profile-viewer {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    width: 100%;
-    padding: 0 10px;
+/* ⭐ NEW SMALLER RESPONSIVE SLIDER */
+.viewer-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.viewer-card {
+  background: rgba(0,0,0,0.35);
+  padding: 20px;
+  border-radius: 14px;
+  width: 350px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 20, 140, 0.4);
+}
+
+.viewer-pfp {
+  width: 220px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.viewer-name {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.viewer-rank {
+  font-size: 18px;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+
+.viewer-phone {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.arrow {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+/* ⭐ MOBILE FIX */
+@media (max-width: 768px) {
+
+  .viewer-wrap {
+    gap: 10px;
   }
 
-  .profile-layout {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-    gap: 15px;
+  .arrow {
+    font-size: 32px;
   }
 
-  /* Profile photo */
-  .pfp-large {
-    width: 80vw;
-    height: auto;
-    max-height: 360px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0, 20, 140, 0.55);
+  .viewer-card {
+    width: 280px;
+    padding: 15px;
   }
 
-  /* Text block */
-  .profile-info {
-    width: 90%;
-    text-align: center;
+  .viewer-pfp {
+    width: 180px;
+    height: 210px;
   }
 
-  .profile-name {
-    font-size: 24px;
+  .viewer-name {
+    font-size: 22px;
   }
 
-  .profile-rank {
-    font-size: 18px;
-  }
-
-  .profile-phone {
+  .viewer-rank {
     font-size: 16px;
   }
 
-  /* Arrows */
-  .arrow {
-    font-size: 36px;
-  }
-
-  /* Footer scaling */
-  .footer {
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .footer img {
-    width: 60px;
-    height: auto;
+  .viewer-phone {
+    font-size: 14px;
   }
 }
 
-/* FINAL MOBILE FIX FOR VAULT + SLIDER */
-@media screen and (max-width: 768px) {
+/* FINAL FORCED MOBILE + DESKTOP FIX */
+.viewer-pfp {
+  width: 180px !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  display: block !important;
+  margin: 0 auto 12px auto !important;
+}
 
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    margin: 0;
-    padding: 0;
+/* Make the whole card smaller */
+.viewer-card {
+  width: 260px !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+}
+
+/* Make arrows smaller */
+.arrow {
+  font-size: 28px !important;
+}
+
+/* MOBILE OVERRIDE */
+@media (max-width: 768px) {
+
+  .viewer-pfp {
+    width: 150px !important;
+    height: 180px !important;
   }
 
-  /* Header */
-  .header-inner {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
+  .viewer-card {
+    width: 230px !important;
+    padding: 10px !important;
   }
 
-  .logo {
-    width: 100px !important;
-    height: auto !important;
-  }
-
-  .title-block h1 {
-    font-size: 20px !important;
-  }
-
-  .title-block h2 {
-    font-size: 14px !important;
-  }
-
-  /* Section spacing */
-  .section {
-    padding: 15px 10px !important;
-  }
-
-  /* Roster images */
-  .roster-large img {
-    width: 100% !important;
-    height: auto !important;
-    border-radius: 10px !important;
-  }
-
-  /* Profile slider */
-  .profile-viewer {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    width: 100% !important;
-    padding: 0 10px !important;
-  }
-
-  .profile-layout {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    gap: 10px !important;
-  }
-
-  /* Profile photo */
-  .pfp-large {
-    width: 70vw !important;
-    height: auto !important;
-    max-height: 320px !important;
-    object-fit: cover !important;
-    border-radius: 12px !important;
-    box-shadow: 0 0 20px rgba(0, 20, 140, 0.55) !important;
-  }
-
-  /* Text block */
-  .profile-info {
-    width: 90% !important;
-    text-align: center !important;
-  }
-
-  .profile-name {
-    font-size: 22px !important;
-  }
-
-  .profile-rank {
+  .viewer-name {
     font-size: 18px !important;
   }
 
-  .profile-phone {
-    font-size: 16px !important;
+  .viewer-rank {
+    font-size: 14px !important;
   }
 
-  /* Arrows */
-  .arrow {
-    font-size: 32px !important;
-  }
-
-  /* Footer */
-  .footer {
+  .viewer-phone {
     font-size: 12px !important;
-    text-align: center !important;
   }
 
-  .footer img {
-    width: 50px !important;
-    height: auto !important;
+  .arrow {
+    font-size: 24px !important;
   }
 }
