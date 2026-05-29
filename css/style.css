@@ -1015,14 +1015,3 @@ filter:
   border-top: 1px solid var(--border-soft);
   padding-top: 6px;
 }
-
-/* NEWS UPDATES (GREEN TEXT) */
-.news-updates {
-  margin-top: 22px;        /* creates the “skip a few lines” spacing */
-  padding-top: 12px;
-  border-top: 1px solid var(--border-soft);
-  color: #006600;          /* bright green */
-  font-size: 15px;
-  line-height: 1.7;
-  white-space: pre-line;   /* keeps spacing clean */
-}
