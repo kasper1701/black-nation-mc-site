@@ -1024,34 +1024,60 @@ filter:
   max-width: 100% !important;
 }
 
-/* MOBILE FIX FOR PROFILE SLIDER */
+/* GLOBAL MOBILE FIX */
 @media (max-width: 900px) {
+
+  /* Prevent ANY horizontal scrolling */
+  body, html {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Fix all large images (roster, properties, etc.) */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Roster images */
+  .roster-large img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /* Profile slider container */
   .profile-viewer {
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    padding: 0 10px;
   }
 
   .profile-layout {
     flex-direction: column;
     width: 100%;
     max-width: 100%;
-    gap: 20px;
+    gap: 15px;
   }
 
+  /* Profile photo — smaller + fits screen */
   .pfp-large {
-    width: 80%;
+    width: 75vw;
     height: auto;
-    max-height: 420px;
+    max-height: 380px;
     object-fit: cover;
+    border-radius: 12px;
   }
 
+  /* Text block */
   .profile-info {
-    width: 90%;
+    width: 100%;
     text-align: center;
   }
 
   .profile-name {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .profile-rank {
@@ -1062,7 +1088,8 @@ filter:
     font-size: 18px;
   }
 
+  /* Arrows */
   .arrow {
-    font-size: 40px;
+    font-size: 38px;
   }
 }
