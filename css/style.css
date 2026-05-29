@@ -6,6 +6,11 @@
 }
 
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* THEME VARIABLES */
 :root {
   --bg: #000;
@@ -46,9 +51,10 @@ body::before {
   background:
     linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("../assets/images/bg.jpg") center center / cover no-repeat;
-  opacity: 0.22; /* now clearly visible but still subtle */
+  opacity: 0.22;
   z-index: -2;
   pointer-events: none;
+  will-change: opacity, transform;
 }
 
 
@@ -58,19 +64,12 @@ body::after {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 25% 20%, rgba(0, 20, 140, 0.22), transparent 60%),
-    radial-gradient(circle at 75% 80%, rgba(0, 20, 140, 0.18), transparent 65%),
-    radial-gradient(circle at 50% 50%, rgba(0, 20, 140, 0.12), transparent 70%);
-  animation: fogMove 22s ease-in-out infinite alternate;
+  radial-gradient(circle at 30% 25%, rgba(0, 20, 140, 0.25), transparent 65%),
+  radial-gradient(circle at 70% 75%, rgba(0, 20, 140, 0.18), transparent 70%);
   z-index: -1;
   pointer-events: none;
   opacity: 0.75;
-}
-
-
-@keyframes fogMove {
-  from { transform: translateY(0px) translateX(0px); }
-  to   { transform: translateY(-35px) translateX(35px); }
+  will-change: opacity, transform;
 }
 
 
@@ -90,7 +89,7 @@ body::after {
 .header {
   padding: 16px 20px 8px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.85);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -891,9 +890,9 @@ main {
 
 /* Logo glow fix */
 .logo {
-  filter:
-    drop-shadow(0 0 25px rgba(0, 20, 140, 0.7))
-    drop-shadow(0 0 45px rgba(0, 20, 140, 0.45));
+filter:
+  drop-shadow(0 0 20px rgba(0, 20, 140, 0.55))
+  drop-shadow(0 0 35px rgba(0, 20, 140, 0.35));
 }
 
 
