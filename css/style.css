@@ -909,295 +909,68 @@ filter:
     drop-shadow(0 0 60px rgba(0, 20, 140, 0.45));
 }
 
-/* PROFILE SLIDER — PERFECT SYMMETRY */
-.profile-slider {
-  text-align: center;
-}
-
-.profile-viewer {
+/* MEMBER VIEWER (Rank Slider) */
+.rank-viewer-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px; /* wider for symmetry */
-  margin-top: 30px;
+  gap: 26px;
+  margin-top: 12px;
 }
 
-/* LOCKED LEFT + RIGHT POSITIONS */
-.profile-layout {
+.rank-viewer-card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 60px;
-  width: 900px; /* fixed width so nothing moves */
-  margin: 0 auto;
-}
-
-/* TALLER + FIXED PHOTO SIZE */
-.pfp-large {
-  width: 360px;
-  height: 480px; /* tall + consistent */
-  object-fit: cover;
+  gap: 22px;
+  background: rgba(0,0,0,0.45);
+  padding: 22px;
   border-radius: 14px;
-  box-shadow: 0 0 40px rgba(0, 20, 140, 0.55);
-  flex-shrink: 0; /* prevents resizing */
+  width: 430px;
+  height: 190px;
+  box-shadow: 0 0 22px rgba(0, 20, 140, 0.45);
 }
 
-/* RIGHT SIDE INFO — FIXED WIDTH SO IT NEVER MOVES */
-.profile-info {
-  text-align: left;
-  width: 360px; /* EXACT same width as photo for symmetry */
-  min-height: 200px; /* prevents shifting when text changes */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.rank-photo {
+  width: 145px;
+  height: 175px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* BIGGER TEXT */
-.profile-name {
-  font-size: 40px;
-  color: var(--text-strong);
-  margin-bottom: 12px;
-}
-
-.profile-rank {
-  font-size: 26px;
-  color: var(--blue);
-  margin-bottom: 10px;
-}
-
-.profile-phone {
-  font-size: 22px;
-  color: var(--text);
-}
-
-/* ARROWS */
-.arrow {
-  background: transparent;
-  border: none;
-  color: var(--blue);
-  font-size: 60px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.arrow:hover {
-  color: var(--text-strong);
-  text-shadow: 0 0 20px rgba(0, 20, 140, 0.8);
-}
-
-/* MOBILE */
-@media (max-width: 900px) {
-  .profile-layout {
-    flex-direction: column;
-    width: 100%;
-    gap: 25px;
-  }
-
-  .pfp-large {
-    width: 280px;
-    height: 360px;
-  }
-
-  .profile-info {
-    width: 280px;
-    text-align: center;
-  }
-
-  .profile-name {
-    font-size: 30px;
-  }
-
-  .profile-rank {
-    font-size: 22px;
-  }
-
-  .profile-phone {
-    font-size: 20px;
-  }
-}
-
-.pfp-large {
-  width: 360px !important;
-  height: 480px !important;
-  object-fit: cover !important;
-  display: block !important;
-  max-width: 100% !important;
-}
-
-/* COMPLETE MOBILE FIX FOR VAULT + SLIDER */
-@media (max-width: 900px) {
-
-  /* Prevent horizontal scroll and overflow */
-  html, body {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-
-  /* Header and logo scaling */
-  .header-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .logo {
-    width: 120px;
-    height: auto;
-  }
-
-  .title-block h1 {
-    font-size: 22px;
-  }
-
-  .title-block h2 {
-    font-size: 16px;
-  }
-
-  /* Section spacing */
-  .section {
-    padding: 20px 10px;
-  }
-
-  /* Roster images */
-  .roster-large img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-
-/* ⭐ NEW SMALLER RESPONSIVE SLIDER */
-.viewer-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
+.rank-photo img {
   width: 100%;
-}
-
-.viewer-card {
-  background: rgba(0,0,0,0.35);
-  padding: 20px;
-  border-radius: 14px;
-  width: 350px;
-  max-width: 90%;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(0, 20, 140, 0.4);
-}
-
-.viewer-pfp {
-  width: 220px;
-  height: 260px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
 }
 
-.viewer-name {
-  font-size: 26px;
-  margin-bottom: 5px;
+.rank-info {
+  text-align: left;
 }
 
-.viewer-rank {
-  font-size: 18px;
+.rank-info p {
+  margin-bottom: 6px;
+}
+
+#rank-name {
+  font-size: 20px;
+}
+
+#rank-role {
+  font-size: 17px;
   color: var(--blue);
-  margin-bottom: 5px;
 }
 
-.viewer-phone {
-  font-size: 16px;
+#rank-phone {
+  font-size: 15px;
   opacity: 0.9;
 }
 
-.arrow {
-  background: transparent;
+.rank-arrow {
+  font-size: 36px;
+  background: none;
   border: none;
-  font-size: 40px;
   color: var(--blue);
   cursor: pointer;
-}
-
-/* ⭐ MOBILE FIX */
-@media (max-width: 768px) {
-
-  .viewer-wrap {
-    gap: 10px;
-  }
-
-  .arrow {
-    font-size: 32px;
-  }
-
-  .viewer-card {
-    width: 280px;
-    padding: 15px;
-  }
-
-  .viewer-pfp {
-    width: 180px;
-    height: 210px;
-  }
-
-  .viewer-name {
-    font-size: 22px;
-  }
-
-  .viewer-rank {
-    font-size: 16px;
-  }
-
-  .viewer-phone {
-    font-size: 14px;
-  }
-}
-
-/* FINAL FORCED MOBILE + DESKTOP FIX */
-.viewer-pfp {
-  width: 180px !important;
-  height: 220px !important;
-  object-fit: cover !important;
-  border-radius: 10px !important;
-  display: block !important;
-  margin: 0 auto 12px auto !important;
-}
-
-/* Make the whole card smaller */
-.viewer-card {
-  width: 260px !important;
-  padding: 12px !important;
-  border-radius: 12px !important;
-}
-
-/* Make arrows smaller */
-.arrow {
-  font-size: 28px !important;
-}
-
-/* MOBILE OVERRIDE */
-@media (max-width: 768px) {
-
-  .viewer-pfp {
-    width: 150px !important;
-    height: 180px !important;
-  }
-
-  .viewer-card {
-    width: 230px !important;
-    padding: 10px !important;
-  }
-
-  .viewer-name {
-    font-size: 18px !important;
-  }
-
-  .viewer-rank {
-    font-size: 14px !important;
-  }
-
-  .viewer-phone {
-    font-size: 12px !important;
-  }
-
-  .arrow {
-    font-size: 24px !important;
-  }
+  user-select: none;
 }
