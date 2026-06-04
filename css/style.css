@@ -1455,3 +1455,8 @@ body::before, body::after {
   .mv-nav-btn         { width: 34px; height: 34px; }
   .mv-name            { font-size: 13px; }
 }
+
+.news-content p {
+  font-weight: bold;
+  font-style: italic;
+}
