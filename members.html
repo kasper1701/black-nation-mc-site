@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Members Vault — Black Nation MC</title>
+
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/transition.js" defer></script>
+  <script src="js/vault.js" defer></script>
+</head>
+<body class="fade-page">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <img src="assets/images/blacknationlogo.png" class="logo" alt="Black Nation MC logo">
+    </a>
+    <div class="title-block">
+      <h1>BLACK NATION MC</h1>
+      <h2 class="motto">BLACK FUCKEN NATION!</h2>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="ranks.html">Ranks</a>
+    <a href="rules.html">Rules</a>
+    <a href="members.html" class="active vault-highlight">Members Vault</a>
+  </nav>
+</header>
+
+<main>
+
+<div id="gate" class="vault-gate-wrap">
+  <div class="vault-gate-bg"></div>
+  <div class="vault-gate-lines"></div>
+
+  <div class="vault-gate-inner">
+
+    <!-- Icon -->
+    <div class="vault-icon-ring">
+      <svg class="vault-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="28" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M20 28V20a12 12 0 0 1 24 0v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="42" r="4" fill="currentColor"/>
+        <line x1="32" y1="46" x2="32" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="vault-icon-pulse"></div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="vault-gate-title">MEMBERS VAULT</h2>
+    <p class="vault-gate-sub">Intended for members only (if code gets leaked it will be changed)</p>
+
+    <!-- Code dots display -->
+    <div class="vault-dots" id="vaultDots">
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+    </div>
+
+    <!-- Input + button -->
+    <div class="vault-input-row">
+      <div class="vault-input-field">
+        <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none">
+          <path d="M10 2a5 5 0 0 0-5 5v2H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v2H7V7zm3 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/>
+        </svg>
+        <input type="password" id="pass" placeholder="Access code" autocomplete="off" oninput="vaultDotSync(this.value)">
+      </div>
+      <button class="vault-unlock-btn" onclick="unlock()">
+        <span class="vault-unlock-label">UNLOCK</span>
+        <svg viewBox="0 0 20 20" fill="none" class="vault-unlock-arrow">
+          <path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p id="msg" class="vault-msg-new"></p>
+
+    <!-- Scan line decoration -->
+    <div class="vault-scan-line"></div>
+  </div>
+</div>
+
+<div id="vault" style="display:none;">
+
+<section class="section roster-section">
+  <h3>ROSTER</h3>
+
+  <div class="roster-large">
+    <img src="assets/images/roster1.jpg" alt="Black Nation roster 1">
+  </div>
+
+  <div class="roster-large">
+    <img src="assets/images/roster2.jpg" alt="Black Nation roster 2">
+  </div>
+</section>
+
+<!-- ⭐ MEMBER VIEWER (Rank Slider) -->
+<section class="section">
+  <h3>MEMBER VIEWER</h3>
+
+  <div class="mv-wrap">
+
+    <div class="mv-stage">
+      <button class="mv-nav-btn mv-prev" onclick="prevProfile()" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="mv-card" id="mvCard">
+        <!-- Full bleed photo -->
+        <div class="mv-photo-full">
+          <img id="rank-pfp" src="assets/images/pfp1.png" alt="Member photo" loading="lazy">
+          <div class="mv-photo-overlay"></div>
+        </div>
+
+        <!-- Badge top-left -->
+        <div class="mv-card-badge" id="mv-badge">PRESIDENT</div>
+        <!-- Patch number top-right -->
+        <div class="mv-patch-num" id="mvPatchNum">#001</div>
+
+        <!-- Info pinned to bottom -->
+        <div class="mv-info">
+          <p id="rank-role" class="mv-role">President</p>
+          <p id="rank-name" class="mv-name"><b>Daquavion Rangateti</b></p>
+          <div class="mv-phone-row">
+            <svg viewBox="0 0 20 20" fill="none" class="mv-phone-icon">
+              <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h.879a1.5 1.5 0 0 1 1.394.944l.738 1.847a1.5 1.5 0 0 1-.34 1.637l-.554.554a9.042 9.042 0 0 0 4.4 4.4l.555-.554a1.5 1.5 0 0 1 1.636-.34l1.848.738A1.5 1.5 0 0 1 18 12.622V13.5A1.5 1.5 0 0 1 16.5 15C8.492 15 2 8.508 2 .5V3.5z" fill="currentColor"/>
+            </svg>
+            <p id="rank-phone" class="mv-phone">022 764 0431</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="mv-nav-btn mv-next" onclick="nextProfile()" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <!-- Progress + counter below card -->
+    <div class="mv-progress-wrap">
+      <div class="mv-progress-track">
+        <div class="mv-progress-bar" id="mvProgress"></div>
+      </div>
+      <div class="mv-counter"><span id="mvCurrent">1</span> / <span id="mvTotal">16</span></div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="mv-dots-row" id="mvDotsRow"></div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h3>MEMBERS</h3>
+  <div class="members-grid">
+    <div class="member-card"><p><b>Daquavion Rangateti</b></p><p>President</p><p>022 764 0431</p></div>
+    <div class="member-card"><p><b>Denero Rangateti</b></p><p>Vice President</p><p>021 344 0513</p></div>
+    <div class="member-card"><p><b>Weston Kopara</b></p><p>SGT of Arms</p><p>027 714 2738</p></div>
+    <div class="member-card"><p><b>Danehura Rangateti</b></p><p>Treasurer</p><p>022 990 0359</p></div>
+    <div class="member-card"><p><b>Rangi Tatoe</b></p><p>Road Captain</p><p>021 148 2254</p></div>
+    <div class="member-card"><p><b>Queenie Rangateti</b></p><p>Queen</p><p>022 990 0359</p></div>
+    <div class="member-card"><p><b>Rayy Ping</b></p><p>Life Member</p><p>027 308 1383</p></div>
+    <div class="member-card"><p><b>Uncle Rangi</b></p><p>Life Member</p><p>022 608 8405</p></div>
+    <div class="member-card"><p><b>Tama TeRangi</b></p><p>Life Member</p><p>022 708 7922</p></div>
+    <div class="member-card"><p><b>Wiremu Kaimoana</b></p><p>Member</p><p>027 490 1777</p></div>
+    <div class="member-card"><p><b>TeAroha Rangimiri</b></p><p>Prospect</p><p>021 206 9288</p></div>
+    <div class="member-card"><p><b>Tui TeRangi</b></p><p>Prospect</p><p>027 215 3803</p></div>
+    <div class="member-card"><p><b>Dum Fucq</b></p><p>Prospect</p><p>(insert)</p></div>
+    <div class="member-card"><p><b>Hemi Pareha</b></p><p>Prospect</p><p>027 091 2342</p></div>
+    <div class="member-card"><p><b>Rawiri Tatoe</b></p><p>Prospect</p><p>(insert)</p></div>
+    <div class="member-card"><p><b>HemiRangi Tewhamatu</b></p><p>Prospect</p><p>020 376 3681</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h3>RADIO FREQUENCY</h3>
+  <p class="radio-readout">
+    <span class="radio-label">Radio Channel</span>
+    <span class="radio-value">23.23</span>
+  </p>
+</section>
+
+<section class="section">
+  <h3>PROPERTIES</h3>
+  <div class="property-grid">
+    <div class="property-card"><img src="assets/images/property1.jpg"><p>Main Pad (587 - Mirror Park Blvd)</p></div>
+    <div class="property-card"><img src="assets/images/property2.jpg"><p>Koros House (538 - Senora Rd)</p></div>
+    <div class="property-card"><img src="assets/images/property3.jpg"><p>Drug Facility (855 - Forum Dr)</p></div>
+    <div class="property-card"><img src="assets/images/property4.jpg"><p>Storage House (1057 - Bayview Dr)</p></div>
+    <div class="property-card"><img src="assets/images/property5.jpg"><p>Clothing Factory (764 - Vespucci Blvd)</p></div>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+<footer class="footer">
+  <p>
+    <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo small">
+    BLACK NATION MC — EST 2025
+  </p>
+  <p class="disclaimer"><b>This content is entirely fictional and created for roleplay purposes only.</b></p>
+</footer>
+
+</body>
+</html>
