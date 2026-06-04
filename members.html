@@ -37,14 +37,58 @@
 
 <main>
 
-<div id="gate" class="section vault-box">
-  <h2>MEMBERS VAULT</h2>
-  <p class="muted">Intended for members only (if code gets leaked it will be changed)</p>
-  <div class="vault-input-wrap">
-    <input type="password" id="pass" placeholder="Access code">
-    <button onclick="unlock()">Unlock</button>
+<div id="gate" class="vault-gate-wrap">
+  <div class="vault-gate-bg"></div>
+  <div class="vault-gate-lines"></div>
+
+  <div class="vault-gate-inner">
+
+    <!-- Icon -->
+    <div class="vault-icon-ring">
+      <svg class="vault-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="28" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M20 28V20a12 12 0 0 1 24 0v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="42" r="4" fill="currentColor"/>
+        <line x1="32" y1="46" x2="32" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="vault-icon-pulse"></div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="vault-gate-title">MEMBERS VAULT</h2>
+    <p class="vault-gate-sub">Intended for members only (if code gets leaked it will be changed)</p>
+
+    <!-- Code dots display -->
+    <div class="vault-dots" id="vaultDots">
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+      <span class="vd"></span>
+    </div>
+
+    <!-- Input + button -->
+    <div class="vault-input-row">
+      <div class="vault-input-field">
+        <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none">
+          <path d="M10 2a5 5 0 0 0-5 5v2H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v2H7V7zm3 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/>
+        </svg>
+        <input type="password" id="pass" placeholder="Access code" autocomplete="off" oninput="vaultDotSync(this.value)">
+      </div>
+      <button class="vault-unlock-btn" onclick="unlock()">
+        <span class="vault-unlock-label">UNLOCK</span>
+        <svg viewBox="0 0 20 20" fill="none" class="vault-unlock-arrow">
+          <path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p id="msg" class="vault-msg-new"></p>
+
+    <!-- Scan line decoration -->
+    <div class="vault-scan-line"></div>
   </div>
-  <p id="msg" class="vault-msg"></p>
 </div>
 
 <div id="vault" style="display:none;">
@@ -65,23 +109,53 @@
 <section class="section">
   <h3>MEMBER VIEWER</h3>
 
-  <div class="rank-viewer-wrap">
+  <div class="mv-wrap">
 
-    <button class="rank-arrow left" onclick="prevProfile()">&#10094;</button>
+    <div class="mv-stage">
+      <button class="mv-nav-btn mv-prev" onclick="prevProfile()" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
 
-    <div class="rank-viewer-card">
-      <div class="rank-photo">
-        <img id="rank-pfp" src="assets/images/pfp1.png">
+      <div class="mv-card" id="mvCard">
+        <!-- Full bleed photo -->
+        <div class="mv-photo-full">
+          <img id="rank-pfp" src="assets/images/pfp1.png" alt="Member photo" loading="lazy">
+          <div class="mv-photo-overlay"></div>
+        </div>
+
+        <!-- Badge top-left -->
+        <div class="mv-card-badge" id="mv-badge">PRESIDENT</div>
+        <!-- Patch number top-right -->
+        <div class="mv-patch-num" id="mvPatchNum">#001</div>
+
+        <!-- Info pinned to bottom -->
+        <div class="mv-info">
+          <p id="rank-role" class="mv-role">President</p>
+          <p id="rank-name" class="mv-name"><b>Daquavion Rangateti</b></p>
+          <div class="mv-phone-row">
+            <svg viewBox="0 0 20 20" fill="none" class="mv-phone-icon">
+              <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h.879a1.5 1.5 0 0 1 1.394.944l.738 1.847a1.5 1.5 0 0 1-.34 1.637l-.554.554a9.042 9.042 0 0 0 4.4 4.4l.555-.554a1.5 1.5 0 0 1 1.636-.34l1.848.738A1.5 1.5 0 0 1 18 12.622V13.5A1.5 1.5 0 0 1 16.5 15C8.492 15 2 8.508 2 .5V3.5z" fill="currentColor"/>
+            </svg>
+            <p id="rank-phone" class="mv-phone">022 764 0431</p>
+          </div>
+        </div>
       </div>
 
-      <div class="rank-info">
-        <p id="rank-name"><b>Daquavion Rangateti</b></p>
-        <p id="rank-role">President</p>
-        <p id="rank-phone">022 764 0431</p>
-      </div>
+      <button class="mv-nav-btn mv-next" onclick="nextProfile()" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
 
-    <button class="rank-arrow right" onclick="nextProfile()">&#10095;</button>
+    <!-- Progress + counter below card -->
+    <div class="mv-progress-wrap">
+      <div class="mv-progress-track">
+        <div class="mv-progress-bar" id="mvProgress"></div>
+      </div>
+      <div class="mv-counter"><span id="mvCurrent">1</span> / <span id="mvTotal">16</span></div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="mv-dots-row" id="mvDotsRow"></div>
 
   </div>
 </section>
