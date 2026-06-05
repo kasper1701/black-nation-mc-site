@@ -2704,20 +2704,45 @@ html.theme-transitioning .vault-icon-ring {
   box-shadow: var(--glow-blue), 0 8px 24px rgba(0,0,0,0.08);
 }
 
-/* ── 12. About page — lock to dark mode values ── */
-[data-theme="light"] .about-origin-label { color: #00148C; }
-[data-theme="light"] .about-origin-heading { color: #fff !important; }
-[data-theme="light"] .about-story-block { background: rgba(255,255,255,0.025) !important; border: none !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
-[data-theme="light"] .about-story-block p { color: #c8c8c8 !important; }
-[data-theme="light"] .about-tl-content p { color: #aaa !important; }
-[data-theme="light"] .about-tl-item:hover .about-tl-content p { color: #ddd !important; }
-[data-theme="light"] .about-tl-year { color: #00148C !important; }
-[data-theme="light"] .about-tl-dot { background: #000 !important; border-color: #00148C !important; box-shadow: 0 0 8px rgba(0,20,140,0.6) !important; }
-[data-theme="light"] .about-tl-item:hover .about-tl-dot { background: #00148C !important; }
-[data-theme="light"] .about-value-item { background: rgba(255,255,255,0.02) !important; border-color: rgba(255,255,255,0.05) !important; }
-[data-theme="light"] .about-value-item:hover { background: rgba(0,20,140,0.1) !important; border-color: rgba(0,20,140,0.35) !important; }
-[data-theme="light"] .about-value-item p { color: #aaa !important; }
-[data-theme="light"] .about-value-item:hover p { color: #fff !important; }
+/* ── 12. About page ──────────────────────────────────────── */
+[data-theme="light"] .about-origin-label {
+  color: #00148C;
+  text-shadow: 0 0 8px rgba(0,20,140,0.3);
+}
+[data-theme="light"] .about-origin-heading { color: #000 !important; }
+[data-theme="light"] .about-story-block p { color: #222; }
+[data-theme="light"] .about-story-accent {
+  background: #00148C;
+  box-shadow: 0 0 8px rgba(0,20,140,0.5);
+}
+[data-theme="light"] .about-timeline::before {
+  background: linear-gradient(to bottom, #00148C, rgba(0,20,140,0.1));
+}
+[data-theme="light"] .about-tl-dot {
+  background: #00148C;
+  border-color: rgba(0,20,140,0.5);
+  box-shadow: 0 0 10px rgba(0,20,140,0.5), 0 0 20px rgba(0,20,140,0.2);
+}
+[data-theme="light"] .about-tl-year {
+  color: #00148C;
+  text-shadow: 0 0 6px rgba(0,20,140,0.3);
+}
+[data-theme="light"] .about-tl-content p { color: #333; }
+[data-theme="light"] .about-tl-item:hover .about-tl-content p { color: #000; }
+[data-theme="light"] .about-value-item {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(0,20,140,0.1);
+}
+[data-theme="light"] .about-value-item:hover {
+  background: rgba(0,20,140,0.06);
+  border-color: rgba(0,20,140,0.28);
+}
+[data-theme="light"] .about-value-bar {
+  background: #00148C;
+  box-shadow: 0 0 8px rgba(0,20,140,0.5);
+}
+[data-theme="light"] .about-value-item p { color: #111; }
+[data-theme="light"] .about-value-item:hover p { color: #00148C; }
 
 /* ── 13. Ranks page ──────────────────────────────────────── */
 [data-theme="light"] .rk-hero-section::before {
@@ -3090,44 +3115,3 @@ html.theme-transitioning .vault-icon-ring {
 [data-theme="light"] .footer-sep { color: rgba(0,20,140,0.4); }
 [data-theme="light"] .footer .disclaimer { color: #777; }
 
-/* ── About page section containers — keep dark in light mode ── */
-[data-theme="light"] .about-origin-section,
-[data-theme="light"] .section-split:has(.about-timeline) {
-  background: var(--bg-panel) !important;
-  color: var(--text) !important;
-  border-color: rgba(255,255,255,0.03) !important;
-  box-shadow: var(--shadow-strong) !important;
-}
-[data-theme="light"] .about-origin-section h3,
-[data-theme="light"] .section-split:has(.about-timeline) h3 {
-  color: #fff !important;
-  border-bottom-color: var(--border-soft) !important;
-}
-[data-theme="light"] .about-origin-section p,
-[data-theme="light"] .section-split:has(.about-timeline) p {
-  color: #c8c8c8 !important;
-}
-
-/* Fallback for browsers without :has() — target by unique about child classes */
-[data-theme="light"] .about-origin-section {
-  background: rgba(10,10,10,0.92) !important;
-  color: #c8c8c8 !important;
-  border-color: rgba(255,255,255,0.03) !important;
-}
-[data-theme="light"] .about-origin-section h3,
-[data-theme="light"] .about-origin-section .about-origin-heading {
-  color: #fff !important;
-}
-[data-theme="light"] .about-origin-section p { color: #c8c8c8 !important; }
-/* The split section (timeline + values) — targeted via its unique children */
-[data-theme="light"] .section:has(.about-timeline),
-[data-theme="light"] .section:has(.about-values-list) {
-  background: rgba(10,10,10,0.92) !important;
-  color: #c8c8c8 !important;
-  border-color: rgba(255,255,255,0.03) !important;
-}
-[data-theme="light"] .section:has(.about-timeline) h3,
-[data-theme="light"] .section:has(.about-values-list) h3 {
-  color: #fff !important;
-  border-bottom-color: #2a2a2a !important;
-}
