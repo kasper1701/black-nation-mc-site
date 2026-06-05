@@ -7,6 +7,15 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  image-rendering: auto;
 }
 
 /* THEME VARIABLES */
@@ -37,6 +46,16 @@ body {
   position: relative;
   padding-bottom: 90px;
   font-family: Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* All interactive elements — no tap flash, fast touch response */
+a, button, input, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 /* SUBTLE BG IMAGE */
@@ -91,6 +110,8 @@ body::after {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 24px rgba(0,0,0,0.7), 0 1px 0 rgba(0,20,140,0.18);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .header-inner {
@@ -192,7 +213,20 @@ body::after {
   height: 2px;
   background: var(--text-strong);
   border-radius: 2px;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease;
+  transform-origin: center;
+}
+/* Animate hamburger to X when open */
+.nav.open ~ .nav-toggle span:nth-child(1),
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* NAVIGATION */
@@ -404,9 +438,9 @@ main {
   text-align: left;
   border: 1px solid rgba(255,255,255,0.03);
   transition: border-color 0.25s ease;
-  contain: layout paint;
+  contain: layout style paint;
   content-visibility: auto;
-  contain-intrinsic-size: 0 400px;
+  contain-intrinsic-size: auto 0 auto 400px;
 }
 
 .section:hover {
@@ -452,6 +486,8 @@ main {
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   object-fit: cover;
   aspect-ratio: 4 / 3;
+  will-change: transform;
+  loading: lazy;
 }
 
 .gallery-grid img:hover {
@@ -792,6 +828,11 @@ main {
   left: 0;
   z-index: 50;
   animation: footerFade 1.2s ease-in-out forwards;
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 @keyframes footerFade {
@@ -847,6 +888,7 @@ main {
   box-shadow: var(--shadow-strong);
   text-align: left;
   border: 1px solid rgba(0,20,140,0.1);
+  contain: layout style paint;
 }
 
 .news-section h3 {
@@ -907,6 +949,8 @@ main {
   overflow: hidden;
   border: 1px solid rgba(0,20,140,0.4);
   box-shadow: 0 0 60px rgba(0,20,140,0.3), 0 0 120px rgba(0,20,140,0.12), inset 0 1px 0 rgba(255,255,255,0.05);
+  --vault-h: 440px;
+  contain: layout style paint;
 }
 
 .vault-gate-bg {
@@ -938,6 +982,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: transparent;
 }
 
 .vault-icon-ring {
@@ -945,6 +990,10 @@ main {
   width: 88px;
   height: 88px;
   margin-bottom: 24px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .vault-icon-svg {
   position: relative;
@@ -952,8 +1001,10 @@ main {
   width: 88px;
   height: 88px;
   color: #fff;
+  background: transparent !important;
   filter: drop-shadow(0 0 12px rgba(0,20,140,0.9)) drop-shadow(0 0 24px rgba(0,20,140,0.5));
   animation: iconFloat 3s ease-in-out infinite;
+  will-change: transform;
 }
 @keyframes iconFloat {
   0%, 100% { transform: translateY(0); }
@@ -965,6 +1016,7 @@ main {
   border-radius: 50%;
   border: 1px solid rgba(0,20,140,0.55);
   animation: pulsering 2.2s ease-out infinite;
+  will-change: transform, opacity;
 }
 .vault-icon-pulse::after {
   content: '';
@@ -1093,17 +1145,19 @@ main {
 
 .vault-scan-line {
   position: absolute;
+  top: 0;
   left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(0,20,140,0.55), transparent);
   animation: scanDown 4s linear infinite;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 @keyframes scanDown {
-  0%   { top: 0;    opacity: 0; }
+  0%   { transform: translateY(0);    opacity: 0; }
   8%   { opacity: 1; }
   92%  { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  100% { transform: translateY(var(--vault-h, 440px)); opacity: 0; }
 }
 
 .vault-gate-wrap.granted { animation: grantedFlash 0.45s ease forwards; }
@@ -1167,6 +1221,8 @@ main {
   border: 1px solid rgba(0,20,140,0.5);
   box-shadow: 0 8px 32px rgba(0,0,0,0.7);
   contain: layout paint;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .mv-photo-full {
@@ -1276,6 +1332,7 @@ main {
   background: linear-gradient(90deg, var(--blue), #00148C);
   border-radius: 3px;
   transition: width 0.32s cubic-bezier(0.4,0,0.2,1);
+  will-change: width;
 }
 .mv-counter {
   font-size: 11px;
@@ -1376,28 +1433,48 @@ body::before, body::after {
 @media (max-width: 700px) {
   .header-inner {
     align-items: center;
+    gap: 10px;
+    padding: 10px 14px 8px;
+    flex-wrap: nowrap;
+  }
+  .title-block {
+    flex: 1;
+    min-width: 0;
+  }
+  .title-block h1, .title-block .motto {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .nav-toggle {
     display: flex;
+    flex-shrink: 0;
   }
   .nav {
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.28s ease-in-out;
+    transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease;
     padding: 0 20px;
   }
   .nav.open {
-    max-height: 220px;
-    padding: 8px 20px 12px;
+    max-height: 260px;
+    padding: 10px 20px 14px;
+  }
+  .nav a {
+    width: 100%;
+    text-align: center;
+    padding: 10px 16px;
   }
   .header h1 {
-    font-size: 24px;
+    font-size: 22px;
+    letter-spacing: 2px;
   }
   .motto {
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
   }
   .gallery-grid,
   .property-grid {
@@ -1411,6 +1488,31 @@ body::before, body::after {
   .vault-input-wrap {
     grid-template-columns: 1fr;
   }
+  .hero {
+    padding: 20px 14px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-primary, .btn-ghost {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .section {
+    padding: 20px 14px;
+    margin: 18px auto;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+  .footer-sep { display: none; }
+  main {
+    padding: 0 10px 40px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1420,25 +1522,49 @@ body::before, body::after {
   .vault-icon-ring,
   .vault-icon-svg     { width: 70px; height: 70px; }
   .vault-input-row    { flex-direction: column; max-width: 100%; }
-  .vault-unlock-btn   { justify-content: center; }
-  .mv-stage           { gap: 12px; }
+  .vault-unlock-btn   { justify-content: center; width: 100%; }
+  .mv-stage           { gap: 10px; }
   .mv-card            { width: 220px; height: 320px; }
-  .mv-nav-btn         { width: 40px; height: 40px; }
+  .mv-nav-btn         { width: 42px; height: 42px; }
   .mv-name            { font-size: 15px; }
   .mv-progress-wrap   { max-width: 280px; }
   .members-grid       { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .property-grid      { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gallery-grid       { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .rank-grid, .rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .header h1          { font-size: 20px; letter-spacing: 2px; }
-  .motto              { font-size: 11px; }
-  .logo               { width: 70px; height: 70px; }
+  .header h1          { font-size: 18px; letter-spacing: 2px; }
+  .motto              { font-size: 10px; }
+  .logo               { width: 64px; height: 64px; }
+  .theme-toggle-label { display: none; }
+  .rk-officers-row    { grid-template-columns: 1fr; }
+  .pillars-wrap       { grid-template-columns: 1fr; }
+  .news-section       { padding: 18px 14px; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   .mv-card            { width: 190px; height: 280px; }
-  .mv-nav-btn         { width: 34px; height: 34px; }
+  .mv-nav-btn         { width: 36px; height: 36px; }
   .mv-name            { font-size: 13px; }
+  .header h1          { font-size: 14px; letter-spacing: 1px; }
+  .motto              { display: none; }
+  .logo               { width: 48px; height: 48px; }
+  .members-grid       { grid-template-columns: 1fr; }
+  .section            { padding: 14px 10px; }
+  .rk-path-steps      { grid-template-columns: 1fr; }
+  .header-inner       { gap: 8px; padding: 8px 10px 6px; }
+}
+
+/* ── Portrait phone — stack header into 2 rows if really tight ── */
+@media (max-width: 360px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 10px;
+  }
+  .logo-wrap          { order: 1; }
+  .title-block        { order: 2; flex: 1; }
+  .theme-toggle       { order: 3; margin-left: auto; }
+  .nav-toggle         { order: 4; }
 }
 /* ─── About page extras ──────────────────────────────────────────────────────── */
 
@@ -2230,7 +2356,6 @@ body::after {
    ============================================================ */
 
 /* ── Smooth theme crossfade ──────────────────────────────── */
-html.theme-transitioning,
 html.theme-transitioning *,
 html.theme-transitioning *::before,
 html.theme-transitioning *::after {
@@ -2242,6 +2367,24 @@ html.theme-transitioning *::after {
     color            0.3s ease,
     filter           0.3s ease,
     text-shadow      0.3s ease !important;
+}
+/* Preserve spring animation on toggle thumb during theme switch */
+html.theme-transitioning .theme-toggle-thumb {
+  transition:
+    transform     0.5s cubic-bezier(0.34,1.56,0.64,1),
+    background    0.4s ease,
+    box-shadow    0.4s ease !important;
+}
+html.theme-transitioning .icon-moon,
+html.theme-transitioning .icon-sun {
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+/* SVGs must never get a background-color transition — prevents white flash */
+html.theme-transitioning svg,
+html.theme-transitioning .vault-icon-svg,
+html.theme-transitioning .vault-icon-ring {
+  transition: color 0.3s ease, filter 0.3s ease !important;
+  background: transparent !important;
 }
 .toggle-flash { animation: trackFlash 0.45s ease forwards; }
 @keyframes trackFlash {
@@ -2377,8 +2520,9 @@ html.theme-transitioning *::after {
   background: #1a1a2e;
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: inset 0 0 8px rgba(0,0,0,0.5), 0 0 10px rgba(0,20,140,0.25);
-  transition: background 0.45s cubic-bezier(0.4,0,0.2,1),
-              box-shadow  0.45s cubic-bezier(0.4,0,0.2,1) !important;
+  transition: background    0.5s cubic-bezier(0.4,0,0.2,1),
+              box-shadow    0.5s cubic-bezier(0.4,0,0.2,1),
+              border-color  0.5s ease !important;
 }
 .theme-toggle-thumb {
   position: absolute;
@@ -2392,9 +2536,18 @@ html.theme-transitioning *::after {
   justify-content: center;
   background: #c8c8ff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1),
-              background  0.4s ease,
-              box-shadow  0.4s ease !important;
+  transition: transform     0.55s cubic-bezier(0.34,1.56,0.64,1),
+              background    0.45s ease,
+              box-shadow    0.45s ease,
+              width         0.25s cubic-bezier(0.34,1.56,0.64,1),
+              border-radius 0.25s ease !important;
+  will-change: transform;
+}
+
+/* Squish pill on press — springs back when released */
+.theme-toggle:active .theme-toggle-thumb {
+  width: 28px;
+  border-radius: 10px;
 }
 .theme-toggle-label {
   font-size: 10px;
@@ -2405,8 +2558,17 @@ html.theme-transitioning *::after {
   user-select: none;
   transition: color 0.3s ease !important;
 }
-.icon-moon { display: block; color: #a0aaff; width: 12px; height: 12px; }
-.icon-sun  { display: none;  color: #f59e0b; width: 12px; height: 12px; }
+/* Icons use opacity + absolute so they cross-fade instead of jump */
+.icon-moon,
+.icon-sun {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1) !important;
+  pointer-events: none;
+}
+.icon-moon { color: #a0aaff; opacity: 1;  transform: scale(1)   rotate(0deg);   }
+.icon-sun  { color: #f59e0b; opacity: 0;  transform: scale(0.5) rotate(-90deg); }
 
 [data-theme="light"] .theme-toggle {
   background: rgba(0,0,0,0.04);
@@ -2435,8 +2597,8 @@ html.theme-transitioning *::after {
   color: #00148C;
   font-weight: 700;
 }
-[data-theme="light"] .icon-moon { display: none; }
-[data-theme="light"] .icon-sun  { display: block; }
+[data-theme="light"] .icon-moon { opacity: 0;  transform: scale(0.5) rotate(90deg);  }
+[data-theme="light"] .icon-sun  { opacity: 1;  transform: scale(1)   rotate(0deg);   }
 
 /* ── 6. Hero ─────────────────────────────────────────────── */
 [data-theme="light"] .hero {
@@ -2781,6 +2943,7 @@ html.theme-transitioning *::after {
 [data-theme="light"] .vault-gate-wrap {
   border-color: rgba(0,20,140,0.3);
   box-shadow: 0 0 50px rgba(0,20,140,0.18), 0 0 100px rgba(0,20,140,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+  background: transparent;
 }
 [data-theme="light"] .vault-gate-bg {
   background:
@@ -2789,7 +2952,7 @@ html.theme-transitioning *::after {
   background-size: 40px 40px;
 }
 [data-theme="light"] .vault-gate-lines {
-  background: linear-gradient(to bottom, rgba(240,238,234,0.92) 0%, rgba(230,236,255,0.8) 50%, rgba(236,234,229,0.95) 100%);
+  background: linear-gradient(to bottom, rgba(220,230,255,0.55) 0%, rgba(200,220,255,0.45) 50%, rgba(215,228,255,0.6) 100%);
 }
 [data-theme="light"] .vault-gate-inner {
   background: transparent;
@@ -2797,6 +2960,7 @@ html.theme-transitioning *::after {
 [data-theme="light"] .vault-icon-ring {
   border-color: rgba(0,20,140,0.45);
   box-shadow: 0 0 18px rgba(0,20,140,0.3), inset 0 0 10px rgba(0,20,140,0.06);
+  background: transparent;
 }
 [data-theme="light"] .vault-icon-svg {
   color: #00148C;
