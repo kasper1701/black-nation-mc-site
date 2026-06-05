@@ -1,21 +1,19 @@
 name: notify
 
 on:
-  push:
+push:
 
 jobs:
-  discord:
-    runs-on: ubuntu-latest
+discord:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Send Discord Embed
-        run: |
-          curl -H "Content-Type: application/json" \
-          -d '{
-            "embeds": [{
-              "title": "New Commit",
-              "description": "${{ github.event.head_commit.message }}",
-              "color": 3447003
-            }]
-          }' \
-          "${{ secrets.DISCORD_WEBHOOK }}"
+```
+steps:
+  - name: Send Discord Embed
+    run: |
+      curl \
+        -H "Content-Type: application/json" \
+        -X POST \
+        -d "{\"embeds\":[{\"title\":\"Test\",\"description\":\"Hello Discord\",\"color\":3447003}]}" \
+        "${{ secrets.DISCORD_WEBHOOK }}"
+```
