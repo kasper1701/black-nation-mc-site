@@ -911,7 +911,7 @@ main {
     linear-gradient(rgba(0,20,140,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,20,140,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
-  animation: none;
+  animation: gridDrift 8s linear infinite;
   z-index: 0;
 }
 @keyframes gridDrift {
@@ -948,7 +948,7 @@ main {
   height: 88px;
   color: #fff;
   filter: drop-shadow(0 0 12px rgba(0,20,140,0.9)) drop-shadow(0 0 24px rgba(0,20,140,0.5));
-  
+  animation: iconFloat 3s ease-in-out infinite;
 }
 @keyframes iconFloat {
   0%, 100% { transform: translateY(0); }
@@ -959,7 +959,7 @@ main {
   inset: -12px;
   border-radius: 50%;
   border: 1px solid rgba(0,20,140,0.55);
-  animation: none;
+  animation: pulsering 2.2s ease-out infinite;
 }
 .vault-icon-pulse::after {
   content: '';
@@ -967,7 +967,7 @@ main {
   inset: -12px;
   border-radius: 50%;
   border: 1px solid rgba(0,20,140,0.28);
-  animation: none;
+  animation: pulsering 2.2s ease-out infinite 1.1s;
 }
 @keyframes pulsering {
   0%   { transform: scale(0.9); opacity: 0.8; }
@@ -1091,7 +1091,7 @@ main {
   left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(0,20,140,0.55), transparent);
-  animation: none;
+  animation: scanDown 4s linear infinite;
   pointer-events: none;
 }
 @keyframes scanDown {
