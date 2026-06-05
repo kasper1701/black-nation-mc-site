@@ -18,16 +18,16 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           COMMIT_COUNT: ${{ github.event.commits.length }}
           COMPARE_URL: ${{ github.event.compare }}
-          COMMIT_URL: ${{ github.event.commits[0].url }}
           SHORT_SHA: ${{ github.sha }}
         run: |
           SHORT="${SHORT_SHA:0:7}"
           REPO_NAME="${REPO##*/}"
+          DESC="commit: ${COMMIT_MSG}"$'\n'"${AUTHOR}"
 
           PAYLOAD=$(jq -n \
             --arg title "[${REPO_NAME}:${BRANCH}] ${COMMIT_COUNT} new commit" \
             --arg title_url "$COMPARE_URL" \
-            --arg desc "`${SHORT}` commit: ${AUTHOR} - ${COMMIT_MSG}" \
+            --arg desc "$DESC" \
             --arg author "$AUTHOR" \
             '{
               embeds: [{
