@@ -1,10 +1,10 @@
 name: Discord Commit Notify
- 
+
 on:
   push:
     branches:
       - main
- 
+
 jobs:
   notify:
     runs-on: ubuntu-latest
@@ -12,25 +12,41 @@ jobs:
       - name: Send Discord Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          COMMIT_MSG: ${{ github.event.commits[0].message }}
+          AUTHOR: ${{ github.event.commits[0].author.name }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          COMMIT_COUNT: ${{ github.event.commits.length }}
+          COMPARE_URL: ${{ github.event.compare }}
+          SHORT_SHA: ${{ github.sha }}
         run: |
-          COMMIT_SHA="${{ github.sha }}"
-          SHORT_SHA="${COMMIT_SHA:0:7}"
-          COMMIT_MSG="${{ github.event.commits[0].message }}"
-          AUTHOR="${{ github.event.commits[0].author.name }}"
-          REPO="${{ github.repository }}"
-          BRANCH="${{ github.ref_name }}"
-          COMMIT_COUNT="${{ github.event.commits.length }}"
-          COMPARE_URL="${{ github.event.compare }}"
- 
-          curl -H "Content-Type: application/json" \
-            -d "{
-              \"embeds\": [{
-                \"color\": 3066993,
-                \"author\": {
-                  \"name\": \"${AUTHOR}\"
-                },
-                \"description\": \"**[${REPO}:${BRANCH}] ${COMMIT_COUNT} new commit**\n\n\`${SHORT_SHA}\` ${COMMIT_MSG} - ${AUTHOR}\",
-                \"url\": \"${COMPARE_URL}\"
+          SHORT="${SHORT_SHA:0:7}"
+          HEADER="**[${REPO}:${BRANCH}] ${COMMIT_COUNT} new commit**"
+          BODY="\`${SHORT}\` ${COMMIT_MSG} - ${AUTHOR}"
+          DESC="${HEADER}\n\n${BODY}"
+
+          PAYLOAD=$(jq -n \
+            --arg desc "$DESC" \
+            --arg url "$COMPARE_URL" \
+            --arg author "$AUTHOR" \
+            '{
+              embeds: [{
+                color: 3066993,
+                author: { name: $author },
+                description: $desc,
+                url: $url
               }]
-            }" \
-            "$DISCORD_WEBHOOK"
+            }')
+
+          RESPONSE=$(curl -s -o /tmp/discord_response.txt -w "%{http_code}" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            "$DISCORD_WEBHOOK")
+
+          echo "Discord response code: $RESPONSE"
+          echo "Discord response body: $(cat /tmp/discord_response.txt)"
+
+          if [ "$RESPONSE" != "204" ]; then
+            echo "ERROR: Discord webhook failed"
+            exit 1
+          fi
