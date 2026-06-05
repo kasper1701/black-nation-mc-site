@@ -59,37 +59,32 @@ a, button, input, [role="button"] {
   touch-action: manipulation;
 }
 
-/* ── BACKGROUND LAYERS — opacity crossfade on theme switch ── */
-/* Dark bg (always present, fades out in light mode) */
+/* SUBTLE BG IMAGE */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  /* dark image layer */
   background:
-    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("../assets/images/bg.jpg") center center / cover no-repeat;
   opacity: 0.22;
-  transition: opacity 0.55s ease;
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
-/* Light bg (sits on top, invisible in dark mode, fades in for light) */
+/* MOVING BLUE FOG OVERLAY */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(0, 20, 140, 0.25), transparent 65%),
+    radial-gradient(circle at 70% 75%, rgba(0, 20, 140, 0.18), transparent 70%);
   z-index: -1;
   pointer-events: none;
-  /* light image + blue fog combined so only one element needed */
-  background:
-    radial-gradient(circle at 20% 20%, rgba(0,20,140,0.07), transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(0,20,140,0.05), transparent 60%),
-    linear-gradient(rgba(236,234,229,0.78), rgba(236,234,229,0.78)),
-    url('../assets/images/bg2.jpg') center center / cover no-repeat;
-  opacity: 0;
-  transition: opacity 0.55s ease;
+  opacity: 0.75;
+  transition: opacity 0.6s ease;
 }
 
 /* ================================================
@@ -2417,11 +2412,17 @@ html.theme-transitioning .vault-icon-ring {
   background-color: #eceae5;
   color: #111;
 }
-/* Fade out dark bg, fade in light bg */
+/* Light mode — swap bg image and reduce fog */
 [data-theme="light"] body::before {
-  opacity: 0;
+  background:
+    linear-gradient(rgba(236,234,229,0.78), rgba(236,234,229,0.78)),
+    url('../assets/images/bg2.jpg') center center / cover no-repeat;
+  opacity: 1;
 }
 [data-theme="light"] body::after {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,20,140,0.07), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(0,20,140,0.05), transparent 60%);
   opacity: 1;
 }
 
