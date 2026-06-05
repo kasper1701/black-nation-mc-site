@@ -1,16 +1,30 @@
 name: notify
 
 on:
+
+
 push:
 
 jobs:
+
+
 discord:
+
+
+
+
 runs-on: ubuntu-latest
 
 
+
+
 steps:
+
+
+
+
+
+
   - name: Send Discord Message
     run: |
-      curl -H "Content-Type: application/json" \
-        -d '{"content":"Hello Discord"}' \
-        "${{ secrets.DISCORD_WEBHOOK }}"
+      curl -H "Content-Type: application/json" -d '{"content":"Hello Discord"}' "${{ secrets.DISCORD_WEBHOOK }}"
