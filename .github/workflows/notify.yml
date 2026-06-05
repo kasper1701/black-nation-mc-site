@@ -27,7 +27,7 @@ jobs:
           PAYLOAD=$(jq -n \
             --arg title "[${REPO_NAME}:${BRANCH}] ${COMMIT_COUNT} new commit" \
             --arg title_url "$COMPARE_URL" \
-            --arg desc "\`${SHORT}\` ${COMMIT_MSG} - ${AUTHOR}" \
+            --arg desc "`${SHORT}` commit: ${COMMIT_MSG} - ${AUTHOR}" \
             --arg author "$AUTHOR" \
             '{
               embeds: [{
