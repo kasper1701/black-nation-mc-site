@@ -6,7 +6,28 @@
   <title>Black Nation MC</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/light-mode.css">
   <script src="js/transition.js" defer></script>
+  <script src="js/theme.js"></script>
+  <style>
+    html.theme-transitioning,
+    html.theme-transitioning *,
+    html.theme-transitioning *::before,
+    html.theme-transitioning *::after {
+      transition:
+        background-color 0.4s ease,
+        background-image 0.4s ease,
+        border-color     0.35s ease,
+        box-shadow       0.4s ease,
+        color            0.3s ease !important;
+    }
+    .toggle-flash { animation: trackFlash 0.45s ease forwards; }
+    @keyframes trackFlash {
+      0%   { opacity: 1; }
+      30%  { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+  </style>
 </head>
 <body class="fade-page">
 
@@ -19,6 +40,15 @@
       <h1>BLACK NATION MC</h1>
       <h2 class="motto">BLACK FUCKEN NATION!</h2>
     </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+      <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </div>
+      </div>
+      <span class="theme-toggle-label">Light</span>
+    </button>
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
     </button>
@@ -39,7 +69,7 @@
   <div class="hero-inner">
     <div class="hero-text">
       <p class="hero-tag">BLACK • FUCKEN • NATION</p>
-      <h3 style="color:#00148C;">LOYALTY • DISCIPLINE • BROTHERHOOD</h3>
+      <h3 class="hero-heading">LOYALTY • DISCIPLINE • BROTHERHOOD</h3>
       <p class="hero-sub">
         Motorcycle Club. Tight circle. No outsiders.
         What happens in the Nation stays in the Nation.
@@ -66,7 +96,7 @@
   <h3>BLACK NATION NEWS</h3>
   <div class="news-content">
     <p>
-      Updated - member vault password ui || Updated - Black Nation User slider in the Members Vault || Added - all the rules are now on the rules page || Updated - most pages have been updated to look better || Added - new transition when password is entered into the member vault.  
+      Updated - member vault password ui || Updated - Black Nation User slider in the Members Vault || Added - all the rules are now on the rules page || Updated - most pages have been updated to look better || Added - new transition when password is entered into the member vault. || Added - new light/dark mode toggler.  
     </p>
   </div>
   <div class="news-footer">
@@ -108,7 +138,6 @@
     </ul>
   </div>
 </section>
-
 
 </main>
 
