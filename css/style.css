@@ -50,6 +50,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.5s ease, color 0.3s ease;
 }
 
 /* All interactive elements — no tap flash, fast touch response */
@@ -58,31 +59,37 @@ a, button, input, [role="button"] {
   touch-action: manipulation;
 }
 
-/* SUBTLE BG IMAGE */
-/* SUBTLE BG IMAGE */
+/* ── BACKGROUND LAYERS — opacity crossfade on theme switch ── */
+/* Dark bg (always present, fades out in light mode) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-    url("../assets/images/bg.jpg") center center / cover no-repeat;
-  opacity: 0.22;
   z-index: -2;
   pointer-events: none;
+  /* dark image layer */
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("../assets/images/bg.jpg") center center / cover no-repeat;
+  opacity: 0.22;
+  transition: opacity 0.55s ease;
 }
 
-/* MOVING BLUE FOG OVERLAY */
+/* Light bg (sits on top, invisible in dark mode, fades in for light) */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(0, 20, 140, 0.25), transparent 65%),
-    radial-gradient(circle at 70% 75%, rgba(0, 20, 140, 0.18), transparent 70%);
   z-index: -1;
   pointer-events: none;
-  opacity: 0.75;
+  /* light image + blue fog combined so only one element needed */
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,20,140,0.07), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(0,20,140,0.05), transparent 60%),
+    linear-gradient(rgba(236,234,229,0.78), rgba(236,234,229,0.78)),
+    url('../assets/images/bg2.jpg') center center / cover no-repeat;
+  opacity: 0;
+  transition: opacity 0.55s ease;
 }
 
 /* ================================================
@@ -713,6 +720,8 @@ main {
 
 .roster-large {
   margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
 }
 
 .roster-large img {
@@ -1401,8 +1410,6 @@ main {
 /* ================================================
    PERFORMANCE
    ================================================ */
-body::before, body::after {
-  }
 
 @media (prefers-reduced-motion: reduce) {
   .vault-icon-svg, .vault-icon-pulse, .vault-icon-pulse::after,
@@ -2340,10 +2347,6 @@ body::before, body::after {
 }
 
 /* ─── PERFORMANCE FIX — remove unnecessary will-change ──────────────────────── */
-body::before {
-}
-body::after {
-}
 /* Header blur reduced for perf */
 .header {
   backdrop-filter: blur(4px);
@@ -2414,16 +2417,11 @@ html.theme-transitioning .vault-icon-ring {
   background-color: #eceae5;
   color: #111;
 }
+/* Fade out dark bg, fade in light bg */
 [data-theme="light"] body::before {
-  background:
-    linear-gradient(rgba(236,234,229,0.78), rgba(236,234,229,0.78)),
-    url('../assets/images/bg2.jpg') center center / cover no-repeat;
-  opacity: 1;
+  opacity: 0;
 }
 [data-theme="light"] body::after {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(0,20,140,0.07), transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(0,20,140,0.05), transparent 60%);
   opacity: 1;
 }
 
@@ -2706,54 +2704,20 @@ html.theme-transitioning .vault-icon-ring {
   box-shadow: var(--glow-blue), 0 8px 24px rgba(0,0,0,0.08);
 }
 
-/* ── 12. About page ──────────────────────────────────────── */
-[data-theme="light"] .about-origin-label {
-  color: #00148C;
-  text-shadow: 0 0 8px rgba(0,20,140,0.3);
-}
-[data-theme="light"] .about-origin-heading {
-  color: #000 !important;
-}
-[data-theme="light"] .about-story-block {
-  background: rgba(255,255,255,0.7);
-  border: 1px solid rgba(0,20,140,0.09);
-  padding: 1rem 1.1rem;
-  border-radius: 6px;
-  box-shadow: var(--card-shadow);
-}
-[data-theme="light"] .about-story-block p { color: #222; }
-[data-theme="light"] .about-story-accent {
-  background: #00148C;
-  box-shadow: 0 0 8px rgba(0,20,140,0.5);
-}
-[data-theme="light"] .about-timeline::before {
-  background: linear-gradient(to bottom, #00148C, rgba(0,20,140,0.1));
-}
-[data-theme="light"] .about-tl-dot {
-  background: #00148C;
-  border-color: rgba(0,20,140,0.5);
-  box-shadow: 0 0 10px rgba(0,20,140,0.5), 0 0 20px rgba(0,20,140,0.2);
-}
-[data-theme="light"] .about-tl-year {
-  color: #00148C;
-  text-shadow: 0 0 6px rgba(0,20,140,0.3);
-}
-[data-theme="light"] .about-tl-content p { color: #333; }
-[data-theme="light"] .about-tl-item:hover .about-tl-content p { color: #000; }
-[data-theme="light"] .about-value-item {
-  background: rgba(255,255,255,0.7);
-  border-color: rgba(0,20,140,0.1);
-}
-[data-theme="light"] .about-value-item:hover {
-  background: rgba(0,20,140,0.06);
-  border-color: rgba(0,20,140,0.28);
-}
-[data-theme="light"] .about-value-bar {
-  background: #00148C;
-  box-shadow: 0 0 8px rgba(0,20,140,0.5);
-}
-[data-theme="light"] .about-value-item p { color: #111; }
-[data-theme="light"] .about-value-item:hover p { color: #00148C; }
+/* ── 12. About page — lock to dark mode values ── */
+[data-theme="light"] .about-origin-label { color: #00148C; }
+[data-theme="light"] .about-origin-heading { color: #fff !important; }
+[data-theme="light"] .about-story-block { background: rgba(255,255,255,0.025) !important; border: none !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+[data-theme="light"] .about-story-block p { color: #c8c8c8 !important; }
+[data-theme="light"] .about-tl-content p { color: #aaa !important; }
+[data-theme="light"] .about-tl-item:hover .about-tl-content p { color: #ddd !important; }
+[data-theme="light"] .about-tl-year { color: #00148C !important; }
+[data-theme="light"] .about-tl-dot { background: #000 !important; border-color: #00148C !important; box-shadow: 0 0 8px rgba(0,20,140,0.6) !important; }
+[data-theme="light"] .about-tl-item:hover .about-tl-dot { background: #00148C !important; }
+[data-theme="light"] .about-value-item { background: rgba(255,255,255,0.02) !important; border-color: rgba(255,255,255,0.05) !important; }
+[data-theme="light"] .about-value-item:hover { background: rgba(0,20,140,0.1) !important; border-color: rgba(0,20,140,0.35) !important; }
+[data-theme="light"] .about-value-item p { color: #aaa !important; }
+[data-theme="light"] .about-value-item:hover p { color: #fff !important; }
 
 /* ── 13. Ranks page ──────────────────────────────────────── */
 [data-theme="light"] .rk-hero-section::before {
@@ -3049,14 +3013,14 @@ html.theme-transitioning .vault-icon-ring {
   border-color: rgba(0,20,140,0.55);
   color: #fff;
 }
-[data-theme="light"] .mv-patch-num { color: rgba(0,20,140,0.3); }
+[data-theme="light"] .mv-patch-num { color: rgba(255,255,255,0.35); }
 [data-theme="light"] .mv-role {
-  color: #4488ff;
-  text-shadow: 0 0 6px rgba(0,20,140,0.3);
+  color: #00148C !important;
 }
-[data-theme="light"] .mv-name { color: #fff; }
-[data-theme="light"] .mv-phone { color: rgba(220,220,220,0.9); }
-[data-theme="light"] .mv-phone-icon { color: #4488ff; }
+[data-theme="light"] .mv-name,
+[data-theme="light"] .mv-name b { color: #fff !important; }
+[data-theme="light"] .mv-phone { color: rgba(200,200,200,0.85) !important; }
+[data-theme="light"] .mv-phone-icon { color: #00148C !important; }
 [data-theme="light"] .mv-progress-track { background: rgba(0,20,140,0.1); }
 [data-theme="light"] .mv-progress-bar {
   background: #00148C;
@@ -3125,3 +3089,45 @@ html.theme-transitioning .vault-icon-ring {
 [data-theme="light"] .footer-brand { color: #333; }
 [data-theme="light"] .footer-sep { color: rgba(0,20,140,0.4); }
 [data-theme="light"] .footer .disclaimer { color: #777; }
+
+/* ── About page section containers — keep dark in light mode ── */
+[data-theme="light"] .about-origin-section,
+[data-theme="light"] .section-split:has(.about-timeline) {
+  background: var(--bg-panel) !important;
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.03) !important;
+  box-shadow: var(--shadow-strong) !important;
+}
+[data-theme="light"] .about-origin-section h3,
+[data-theme="light"] .section-split:has(.about-timeline) h3 {
+  color: #fff !important;
+  border-bottom-color: var(--border-soft) !important;
+}
+[data-theme="light"] .about-origin-section p,
+[data-theme="light"] .section-split:has(.about-timeline) p {
+  color: #c8c8c8 !important;
+}
+
+/* Fallback for browsers without :has() — target by unique about child classes */
+[data-theme="light"] .about-origin-section {
+  background: rgba(10,10,10,0.92) !important;
+  color: #c8c8c8 !important;
+  border-color: rgba(255,255,255,0.03) !important;
+}
+[data-theme="light"] .about-origin-section h3,
+[data-theme="light"] .about-origin-section .about-origin-heading {
+  color: #fff !important;
+}
+[data-theme="light"] .about-origin-section p { color: #c8c8c8 !important; }
+/* The split section (timeline + values) — targeted via its unique children */
+[data-theme="light"] .section:has(.about-timeline),
+[data-theme="light"] .section:has(.about-values-list) {
+  background: rgba(10,10,10,0.92) !important;
+  color: #c8c8c8 !important;
+  border-color: rgba(255,255,255,0.03) !important;
+}
+[data-theme="light"] .section:has(.about-timeline) h3,
+[data-theme="light"] .section:has(.about-values-list) h3 {
+  color: #fff !important;
+  border-bottom-color: #2a2a2a !important;
+}
