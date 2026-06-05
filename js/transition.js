@@ -1,14 +1,14 @@
 document.body.classList.add("fade-page");
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Trigger fade-in on next frame so the transition is always visible
+  // Trigger fade-in on next frame so transition is always visible
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.body.classList.add("fade-in");
     });
   });
 
-  // Smooth page transitions
+  // Smooth page transitions — matches CSS transition duration
   document.querySelectorAll("a").forEach(link => {
     const href = link.getAttribute("href");
     if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
@@ -17,12 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const dest = link.href;
       document.body.classList.remove("fade-in");
-      // Match CSS transition duration exactly
-      setTimeout(() => { window.location = dest; }, 220);
+      setTimeout(() => { window.location = dest; }, 300);
     });
   });
 
-  // Mobile nav toggle — also close on nav link tap
+  // Mobile nav toggle — close on nav link tap
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
   if (navToggle && nav) {
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
       nav.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", nav.classList.contains("open"));
     });
-    // Close nav when a link is tapped on mobile
     nav.querySelectorAll("a").forEach(a => {
       a.addEventListener("click", () => nav.classList.remove("open"));
     });

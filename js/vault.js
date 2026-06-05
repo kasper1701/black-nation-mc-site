@@ -29,6 +29,7 @@ async function unlock() {
     setTimeout(() => {
       gate.style.display  = "none";
       vault.style.display = "block";
+      vault.classList.add("visible");
       updateRankViewer();
       buildDots();
     }, 460);
