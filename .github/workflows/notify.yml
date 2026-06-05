@@ -31,7 +31,7 @@ jobs:
             --arg author "$AUTHOR" \
             '{
               embeds: [{
-                color: 3066993,
+                color: 3950,
                 author: { name: $author },
                 title: $title,
                 url: $title_url,
