@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Members Vault — Black Nation MC</title>
-
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
@@ -25,7 +24,7 @@
       <span></span><span></span><span></span>
     </button>
   </div>
-
+  <div class="header-divider"></div>
   <nav class="nav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -43,7 +42,6 @@
 
   <div class="vault-gate-inner">
 
-    <!-- Icon -->
     <div class="vault-icon-ring">
       <svg class="vault-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="12" y="28" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/>
@@ -54,11 +52,9 @@
       <div class="vault-icon-pulse"></div>
     </div>
 
-    <!-- Title -->
     <h2 class="vault-gate-title">MEMBERS VAULT</h2>
     <p class="vault-gate-sub">Intended for members only (if code gets leaked it will be changed)</p>
 
-    <!-- Code dots display -->
     <div class="vault-dots" id="vaultDots">
       <span class="vd"></span>
       <span class="vd"></span>
@@ -68,7 +64,6 @@
       <span class="vd"></span>
     </div>
 
-    <!-- Input + button -->
     <div class="vault-input-row">
       <div class="vault-input-field">
         <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none">
@@ -85,8 +80,6 @@
     </div>
 
     <p id="msg" class="vault-msg-new"></p>
-
-    <!-- Scan line decoration -->
     <div class="vault-scan-line"></div>
   </div>
 </div>
@@ -95,40 +88,29 @@
 
 <section class="section roster-section">
   <h3>ROSTER</h3>
-
   <div class="roster-large">
     <img src="assets/images/roster1.jpg" alt="Black Nation roster 1">
   </div>
-
   <div class="roster-large">
     <img src="assets/images/roster2.jpg" alt="Black Nation roster 2">
   </div>
 </section>
 
-<!-- ⭐ MEMBER VIEWER (Rank Slider) -->
 <section class="section">
   <h3>MEMBER VIEWER</h3>
-
   <div class="mv-wrap">
-
     <div class="mv-stage">
       <button class="mv-nav-btn mv-prev" onclick="prevProfile()" aria-label="Previous">
         <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
       <div class="mv-card" id="mvCard">
-        <!-- Full bleed photo -->
         <div class="mv-photo-full">
           <img id="rank-pfp" src="assets/images/pfp1.png" alt="Member photo" loading="lazy">
           <div class="mv-photo-overlay"></div>
         </div>
-
-        <!-- Badge top-left -->
         <div class="mv-card-badge" id="mv-badge">PRESIDENT</div>
-        <!-- Patch number top-right -->
         <div class="mv-patch-num" id="mvPatchNum">#001</div>
-
-        <!-- Info pinned to bottom -->
         <div class="mv-info">
           <p id="rank-role" class="mv-role">President</p>
           <p id="rank-name" class="mv-name"><b>Daquavion Rangateti</b></p>
@@ -146,7 +128,6 @@
       </button>
     </div>
 
-    <!-- Progress + counter below card -->
     <div class="mv-progress-wrap">
       <div class="mv-progress-track">
         <div class="mv-progress-bar" id="mvProgress"></div>
@@ -154,9 +135,7 @@
       <div class="mv-counter"><span id="mvCurrent">1</span> / <span id="mvTotal">16</span></div>
     </div>
 
-    <!-- Dot indicators -->
     <div class="mv-dots-row" id="mvDotsRow"></div>
-
   </div>
 </section>
 
@@ -206,11 +185,14 @@
 </main>
 
 <footer class="footer">
-  <p>
-    <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo small">
-    BLACK NATION MC — EST 2025
-  </p>
-  <p class="disclaimer"><b>This content is entirely fictional and created for roleplay purposes only.</b></p>
+  <div class="footer-inner">
+    <span class="footer-brand">
+      <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo">
+      BLACK NATION MC — EST 2025
+    </span>
+    <span class="footer-sep">•</span>
+    <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+  </div>
 </footer>
 
 </body>
