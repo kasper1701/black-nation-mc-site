@@ -26,7 +26,7 @@ jobs:
 
           PAYLOAD=$(jq -n \
             --arg title "[${REPO_NAME}:${BRANCH}] ${COMMIT_COUNT} new commit" \
-            --arg title_url "$COMPARE_URL" \
+            --arg title_url "https://github.com/blacknationmc/members-vault-private" \
             --arg desc "$DESC" \
             --arg author "$AUTHOR" \
             '{
