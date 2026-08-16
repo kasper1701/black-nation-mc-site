@@ -56,16 +56,7 @@ const rankProfiles = [
   { pfp: "pfp4.png",  name: "Danehura Rangateti",    role: "Treasurer",      phone: "022 990 0359" },
   { pfp: "pfp5.png",  name: "Rangi Tatoe",           role: "Road Captain",   phone: "021 148 2254" },
   { pfp: "pfp6.png",  name: "Queenie Rangateti",     role: "Queen",          phone: "022 990 0359" },
-  { pfp: "pfp7.png",  name: "Rayy Ping",             role: "Life Member",    phone: "027 308 1383" },
-  { pfp: "pfp8.png",  name: "Uncle Rangi",           role: "Life Member",    phone: "022 608 8405" },
-  { pfp: "pfp9.png",  name: "Tama TeRangi",          role: "Life Member",    phone: "022 708 7922" },
-  { pfp: "pfp10.png", name: "Wiremu Kaimoana",       role: "Member",         phone: "027 490 1777" },
-  { pfp: "pfp11.png", name: "TeAroha Rangimiri",     role: "Prospect",       phone: "021 206 9288" },
-  { pfp: "pfp12.png", name: "Tui TeRangi",           role: "Prospect",       phone: "027 215 3803" },
-  { pfp: "pfp13.png", name: "Dum Fucq",              role: "Prospect",       phone: "(insert)"     },
-  { pfp: "pfp14.png", name: "Hemi Pareha",           role: "Prospect",       phone: "027 091 2342" },
-  { pfp: "pfp15.png", name: "Rawiri Tatoe",          role: "Prospect",       phone: "(insert)"     },
-  { pfp: "pfp16.png", name: "HemiRangi Tewhamatu",   role: "Prospect",       phone: "020 376 3681" }
+  { pfp: "pfp7.png",  name: "Tama TeRangi",          role: "Life Member",    phone: "022 708 7922" }
 ];
 
 let rankIndex = 0;
