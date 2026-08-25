@@ -50,13 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const rankProfiles = [
-  { pfp: "pfp1.png",  name: "Daquavion Rangateti",  role: "President",      phone: "022 764 0431" },
+  { pfp: "pfp1.png",  name: "Daquavion Rangateti",   role: "President",      phone: "022 764 0431" },
   { pfp: "pfp2.png",  name: "Denero Rangateti",      role: "Vice President", phone: "021 344 0513" },
   { pfp: "pfp3.png",  name: "Weston Kopara",         role: "SGT of Arms",    phone: "027 714 2738" },
   { pfp: "pfp4.png",  name: "Danehura Rangateti",    role: "Treasurer",      phone: "022 990 0359" },
   { pfp: "pfp5.png",  name: "Rangi Tatoe",           role: "Road Captain",   phone: "021 148 2254" },
   { pfp: "pfp6.png",  name: "Queenie Rangateti",     role: "Queen",          phone: "022 990 0359" },
-  { pfp: "pfp7.png",  name: "Tama TeRangi",          role: "Life Member",    phone: "022 708 7922" }
+  { pfp: "pfp7.png",  name: "Tama TeRangi",          role: "Life Member",    phone: "022 708 7922" },
+  { pfp: "pfp8.png",  name: "Wiremu Terangi",        role: "Hangi",          phone: "WIP" },
+  { pfp: "pfp9.png",  name: "Zephyr Lafaungi",       role: "Hangi",          phone: "WIP" }
+
+
 ];
 
 let rankIndex = 0;
