@@ -16,7 +16,7 @@ async function signInWithDiscord() {
       // "guilds.members.read" is what lets us check server roles after
       // sign-in — no bot required, this uses the person's own token.
       scopes: "identify guilds.members.read",
-      redirectTo: window.location.origin + "/members.html",
+      redirectTo: window.location.href.split("#")[0],
     },
   });
 }
@@ -30,6 +30,20 @@ if (btn) {
     btn.href = "members.html";
     btn.setAttribute("aria-label", "My Account");
     btn.classList.add("logged-in");
+
+    const avatarUrl =
+      session.user.user_metadata?.avatar_url ||
+      session.user.user_metadata?.picture ||
+      null;
+
+    if (avatarUrl) {
+      const img = document.createElement("img");
+      img.src = avatarUrl;
+      img.alt = "";
+      img.className = "auth-avatar";
+      btn.innerHTML = "";
+      btn.appendChild(img);
+    }
   } else {
     btn.removeAttribute("href");
     btn.style.cursor = "pointer";
