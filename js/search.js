@@ -9,10 +9,10 @@
     { title: "What We Stand For", url: "about.html", desc: "Club values — keep the circle tight, protect the name." },
     { title: "Ranks — Rank Structure", url: "ranks.html", desc: "Full chain of command from President down to Prospects." },
     { title: "President", url: "ranks.html", desc: "Top rank. Final say on all club matters." },
-    { title: "Vice President", url: "ranks.html", desc: "Second in command, runs the club when the President is unavailable." },
-    { title: "Sergeant At Arms", url: "ranks.html", desc: "Handles security and discipline." },
-    { title: "Treasurer", url: "ranks.html", desc: "Manages club money, supplies, and assets." },
-    { title: "Road Captain", url: "ranks.html", desc: "Organizes rides and convoys." },
+    { title: "Vice President", url: "ranks.html", desc: "Exec rank, runs the club when the President is unavailable." },
+    { title: "Sergeant At Arms", url: "ranks.html", desc: "Exec rank. Handles security and discipline." },
+    { title: "Treasurer", url: "ranks.html", desc: "Officer rank. Manages club money, supplies, and assets." },
+    { title: "Road Captain", url: "ranks.html", desc: "Officer rank. Organizes rides and convoys." },
     { title: "Life Members", url: "ranks.html", desc: "Earned through years of loyalty and service." },
     { title: "Members & Prospects", url: "ranks.html", desc: "Patched members and trial prospects." },
     { title: "Path To The Patch", url: "ranks.html", desc: "The steps from prospect to patched member." },
@@ -23,7 +23,7 @@
     { title: "Motorcycle Rules", url: "rules.html", desc: "Riding, convoys, and formation." },
     { title: "Communication Rules", url: "rules.html", desc: "Keeping club info private." },
     { title: "Punishments", url: "rules.html", desc: "Minor and major punishment tiers." },
-    { title: "Members Vault", url: "members.html", desc: "Members-only area — access code required." },
+    { title: "Members Vault", url: "members.html", desc: "Members-only area — log in with your account to view." },
   ];
 
   function normalize(s) {

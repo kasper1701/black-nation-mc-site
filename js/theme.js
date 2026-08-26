@@ -1,4 +1,7 @@
 // ── Theme toggle — Dark (default) / Light ──────────────────────────────────
+// First visit: follows the visitor's OS/browser color-scheme preference.
+// Once they use the toggle, that manual choice is stored and always wins
+// after that — we never override an explicit choice.
 (function () {
   const STORAGE_KEY = "bn-theme";
 
@@ -18,8 +21,16 @@
     try { localStorage.setItem(STORAGE_KEY, v); } catch {}
   }
 
-  // Apply immediately (before paint) to avoid flash
-  applyTheme(getStored() || "dark");
+  function prefersLight() {
+    try {
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    } catch { return false; }
+  }
+
+  // Apply immediately (before paint) to avoid flash.
+  // No stored choice yet? Follow the OS preference instead of forcing dark.
+  const stored = getStored();
+  applyTheme(stored || (prefersLight() ? "light" : "dark"));
 
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("themeToggle");
@@ -35,9 +46,8 @@
       if (label) label.textContent = isLight ? "Light" : "Dark";
 
       if (animate && track) {
-        // Ripple flash on the track
         track.classList.remove("toggle-flash");
-        void track.offsetWidth; // reflow
+        void track.offsetWidth;
         track.classList.add("toggle-flash");
         setTimeout(() => track.classList.remove("toggle-flash"), 500);
       }
@@ -49,16 +59,25 @@
       const isLight = document.documentElement.hasAttribute("data-theme");
       const next = isLight ? "dark" : "light";
 
-      // Add transition class to html for smooth color/bg crossfade
       document.documentElement.classList.add("theme-transitioning");
 
       applyTheme(next);
-      setStored(next);
+      setStored(next); // explicit choice — from now on this always wins
       syncBtn(true);
 
       setTimeout(() => {
         document.documentElement.classList.remove("theme-transitioning");
       }, 500);
     });
+
+    // If the visitor never manually chose, keep following OS changes live
+    // (e.g. their system flips to dark mode at sunset).
+    if (!getStored() && window.matchMedia) {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+        if (getStored()) return;
+        applyTheme(e.matches ? "light" : "dark");
+        syncBtn(false);
+      });
+    }
   });
 })();
