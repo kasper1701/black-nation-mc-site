@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
   <script src="js/vault.js" defer></script>
+  <script type="module" src="js/auth-gate.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/search.js" defer></script>
   <script src="js/last-updated.js" defer></script>
@@ -97,38 +98,23 @@
     </div>
 
     <h2 class="vault-gate-title">MEMBERS VAULT</h2>
-    <p class="vault-gate-sub">Intended for members only (if code gets leaked it will be changed)</p>
+    <p class="vault-gate-sub">Log in with your account to view this page.</p>
 
-    <div class="vault-dots" id="vaultDots">
-      <span class="vd"></span>
-      <span class="vd"></span>
-      <span class="vd"></span>
-      <span class="vd"></span>
-      <span class="vd"></span>
-      <span class="vd"></span>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top: 6px;">
+      <a href="login.html" class="btn-primary">Log In</a>
+      <a href="signup.html" class="btn-ghost">Create Account</a>
     </div>
 
-    <div class="vault-input-row">
-      <div class="vault-input-field">
-        <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none">
-          <path d="M10 2a5 5 0 0 0-5 5v2H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v2H7V7zm3 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/>
-        </svg>
-        <input type="password" id="pass" placeholder="Access code" autocomplete="off" oninput="vaultDotSync(this.value)">
-      </div>
-      <button class="vault-unlock-btn" onclick="unlock()">
-        <span class="vault-unlock-label">UNLOCK</span>
-        <svg viewBox="0 0 20 20" fill="none" class="vault-unlock-arrow">
-          <path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <p id="msg" class="vault-msg-new"></p>
     <div class="vault-scan-line"></div>
   </div>
 </div>
 
 <div id="vault" style="display:none;">
+
+<section class="section" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+  <p style="margin:0;">Welcome back, <b id="vaultWelcomeName">member</b>.</p>
+  <button id="vaultLogoutBtn" class="btn-ghost" type="button">Log Out</button>
+</section>
 
 <section class="section roster-section">
   <h3>ROSTER</h3>

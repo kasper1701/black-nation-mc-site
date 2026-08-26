@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Log In — Black Nation MC</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <meta name="robots" content="noindex">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/transition.js" defer></script>
+  <script src="js/theme.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/last-updated.js" defer></script>
+
+  <style>
+    /* Small additions for a multi-field, single-column auth form —
+       reuses all the vault-gate colors/variables already defined in style.css */
+    .auth-field-row { width: 100%; max-width: 370px; margin-bottom: 14px; }
+    .auth-field-row .vault-input-field { width: 100%; }
+    .auth-submit-btn { width: 100%; max-width: 370px; justify-content: center; margin-top: 6px; }
+    .auth-switch-link { margin-top: 22px; font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+    .auth-switch-link a { color: #4d5fd6; text-decoration: none; font-weight: bold; }
+    .auth-switch-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body class="fade-page">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <img src="assets/images/blacknationlogo.png" class="logo" alt="Black Nation MC logo">
+    </a>
+    <div class="title-block">
+      <h1>BLACK NATION MC</h1>
+      <h2 class="motto">BLACK FUCKEN NATION!</h2>
+    </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Search site">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+      <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </div>
+      </div>
+      <span class="theme-toggle-label">Light</span>
+    </button>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="header-divider"></div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="ranks.html">Ranks</a>
+    <a href="rules.html">Rules</a>
+    <a href="members.html" class="vault-highlight">Members Vault</a>
+  </nav>
+</header>
+
+<div class="site-search-overlay" id="searchOverlay">
+  <div class="site-search-box">
+    <div class="site-search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" class="site-search-icon"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="siteSearchInput" placeholder="Search the site…" autocomplete="off">
+      <button class="site-search-close" id="searchClose" aria-label="Close search">&times;</button>
+    </div>
+    <div class="site-search-results" id="siteSearchResults"></div>
+  </div>
+</div>
+
+<main>
+
+<div class="vault-gate-wrap">
+  <div class="vault-gate-bg"></div>
+  <div class="vault-gate-lines"></div>
+
+  <div class="vault-gate-inner">
+    <div class="vault-icon-ring">
+      <svg class="vault-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="28" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M20 28V20a12 12 0 0 1 24 0v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="42" r="4" fill="currentColor"/>
+        <line x1="32" y1="46" x2="32" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="vault-icon-pulse"></div>
+    </div>
+
+    <h2 class="vault-gate-title">MEMBER LOGIN</h2>
+    <p class="vault-gate-sub">Log in with your account to enter the Members Vault.</p>
+
+    <form id="login-form" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+      <div class="auth-field-row">
+        <div class="vault-input-field">
+          <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none"><path d="M2.5 4.5h15v11h-15z" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 5l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <input type="email" id="email" required placeholder="Email" autocomplete="email">
+        </div>
+      </div>
+      <div class="auth-field-row">
+        <div class="vault-input-field">
+          <svg class="vault-input-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2a5 5 0 0 0-5 5v2H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v2H7V7z" fill="currentColor"/></svg>
+          <input type="password" id="password" required placeholder="Password" autocomplete="current-password">
+        </div>
+      </div>
+
+      <button type="submit" class="vault-unlock-btn auth-submit-btn" id="submit-btn">
+        <span class="vault-unlock-label">LOG IN</span>
+        <svg viewBox="0 0 20 20" fill="none" class="vault-unlock-arrow"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+
+    <p id="msg" class="vault-msg-new"></p>
+    <p class="auth-switch-link">Need an account? <a href="signup.html">Sign up with a Member ID</a></p>
+
+    <div class="vault-scan-line"></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand">
+      <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo">
+      BLACK NATION MC — EST 2025
+    </span>
+    <span class="footer-sep">•</span>
+    <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+    <span class="footer-sep">•</span>
+    <span class="footer-updated" id="footerUpdated"></span>
+  </div>
+</footer>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+  import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./js/supabase-config.js";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById("login-form");
+  const msg = document.getElementById("msg");
+  const btn = document.getElementById("submit-btn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    msg.textContent = "";
+    msg.style.color = "";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    btn.disabled = false;
+
+    if (error) {
+      msg.textContent = error.message;
+      msg.style.color = "#ff4444";
+      return;
+    }
+
+    window.location.href = "members.html";
+  });
+</script>
+
+</body>
+</html>
