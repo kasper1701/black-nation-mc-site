@@ -20,7 +20,6 @@ const PRECACHE_URLS = [
   "js/last-updated.js",
   "js/lightbox.js",
   "js/copy.js",
-  "js/share.js",
   "manifest.json",
 ];
 
