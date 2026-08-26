@@ -30,7 +30,6 @@
   <script src="js/pwa.js" defer></script>
   <script src="js/search.js" defer></script>
   <script src="js/last-updated.js" defer></script>
-  <script src="js/share.js" defer></script>
   <script src="js/lightbox.js" defer></script>
   <script src="js/copy.js" defer></script>
   <style>
@@ -78,8 +77,8 @@
     </div>
     <button class="search-toggle" id="searchToggle" aria-label="Search site">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    <button class="share-toggle" id="shareToggle" aria-label="Share this page">\n      <svg viewBox="0 0 24 24" fill="none" class="share-icon-default"><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>\n      <svg viewBox="0 0 24 24" fill="none" class="share-icon-done"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>\n    </button>
-    <a href="login.html" class="auth-toggle" id="authToggle" aria-label="Log In">
+    </button>
+    <a href="#" class="auth-toggle" id="authToggle" aria-label="Sign in with Discord">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </a>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
@@ -135,13 +134,10 @@
       <div class="vault-icon-pulse"></div>
     </div>
 
-    <h2 class="vault-gate-title">MEMBERS VAULT</h2>
-    <p class="vault-gate-sub">Log in with your account to view this page.</p>
+    <h2 class="vault-gate-title" id="gateTitle">MEMBERS VAULT</h2>
+    <p class="vault-gate-sub" id="gateSub">Sign in with Discord to check your access.</p>
 
-    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top: 6px;">
-      <a href="login.html" class="btn-primary">Log In</a>
-      <a href="signup.html" class="btn-ghost">Create Account</a>
-    </div>
+    <div id="gateActions" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top: 6px;"></div>
 
     <div class="vault-scan-line"></div>
   </div>
