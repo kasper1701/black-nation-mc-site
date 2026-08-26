@@ -1,9 +1,61 @@
-// Password stored as SHA-256 hash — plain text never in this file
-const _h = "41e56c6355e62dd12595d8836db729dbedda31d6e02fcc598dd5a0a71babe9c7";
+// ── Vault password verification ─────────────────────────────────────────────
+// Uses salted PBKDF2 (250,000 iterations) instead of a single SHA-256 pass.
+// This does NOT make the vault unhackable — the check still runs in the
+// browser, so anyone can read this file. What it does do is make every
+// single guess (online or offline, scripted or manual) computationally
+// expensive instead of instant, and the salt stops precomputed hash-lookup
+// tables from working. Real protection against a determined attacker
+// requires server-side auth; see the note at the bottom of this file.
+//
+// To set or change the password, open generate-credentials.html (included
+// alongside this file), type the new password, and paste the SALT_HEX and
+// HASH_HEX it gives you in below. Never put the plain password itself here.
 
-async function _sha256(str) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+const SALT_HEX   = "30b1e2df4bc13bb77031639940e17b2c";
+const HASH_HEX   = "5b17268c329ecacd19765168df4a04574fa708952b70f11c120a11a019857f09";
+const ITERATIONS = 250000;
+
+function _hexToBytes(hex) {
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < bytes.length; i++) bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+  return bytes;
+}
+function _bytesToHex(bytes) {
+  return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function _deriveHash(password) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]
+  );
+  const bits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", hash: "SHA-256", salt: _hexToBytes(SALT_HEX), iterations: ITERATIONS },
+    keyMaterial, 256
+  );
+  return _bytesToHex(new Uint8Array(bits));
+}
+
+// ── Lockout with exponential backoff ────────────────────────────────────────
+// Deters casual repeated guessing through the on-page UI. It lives in
+// localStorage, so it's easy for a technical visitor to clear — it's a
+// speed bump for typical use, not a hard barrier.
+const LOCK_KEY = "bn-vault-lock";
+
+function _getLockState() {
+  try {
+    return JSON.parse(localStorage.getItem(LOCK_KEY)) || { fails: 0, until: 0 };
+  } catch { return { fails: 0, until: 0 }; }
+}
+function _setLockState(state) {
+  try { localStorage.setItem(LOCK_KEY, JSON.stringify(state)); } catch {}
+}
+function _backoffMs(fails) {
+  if (fails < 3)  return 0;
+  if (fails < 5)  return 5000;
+  if (fails < 8)  return 30000;
+  if (fails < 12) return 120000;
+  return 600000; // capped at 10 minutes
 }
 
 // Sync dot indicators with input length
@@ -20,9 +72,21 @@ async function unlock() {
   const vault = document.getElementById("vault");
   const wrap  = document.querySelector(".vault-gate-wrap");
 
-  const inputHash = await _sha256(pass.value);
+  const lock = _getLockState();
+  const now = Date.now();
+  if (lock.until > now) {
+    const secs = Math.ceil((lock.until - now) / 1000);
+    msg.innerText = `TOO MANY ATTEMPTS — WAIT ${secs}s`;
+    msg.style.color = "#ff4444";
+    wrap.classList.add("denied");
+    setTimeout(() => wrap.classList.remove("denied"), 420);
+    return;
+  }
 
-  if (inputHash === _h) {
+  const inputHash = await _deriveHash(pass.value);
+
+  if (inputHash === HASH_HEX) {
+    _setLockState({ fails: 0, until: 0 });
     msg.innerText = "ACCESS GRANTED";
     msg.style.color = "lime";
     wrap.classList.add("granted");
@@ -34,7 +98,11 @@ async function unlock() {
       buildDots();
     }, 460);
   } else {
-    msg.innerText = "INCORRECT CODE";
+    const fails = lock.fails + 1;
+    const wait = _backoffMs(fails);
+    _setLockState({ fails, until: wait ? now + wait : 0 });
+
+    msg.innerText = wait ? `INCORRECT CODE — LOCKED ${Math.ceil(wait / 1000)}s` : "INCORRECT CODE";
     msg.style.color = "#ff4444";
     wrap.classList.add("denied");
     document.querySelectorAll('.vd').forEach(d => d.classList.remove('filled'));
@@ -123,6 +191,10 @@ function _applyProfile() {
   document.querySelectorAll(".mv-dot").forEach((d, i) =>
     d.classList.toggle("active", i === rankIndex)
   );
+  // Copy button — grey out for placeholder ("WIP") numbers
+  if (window.__updateCopyBtnState) {
+    window.__updateCopyBtnState(document.getElementById("mvPhoneCopy"), p.phone);
+  }
 }
 
 function updateRankViewer() { _applyProfile(); }

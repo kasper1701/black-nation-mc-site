@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Page Not Found — Black Nation MC</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <meta name="description" content="Page not found — Black Nation MC.">
+  <meta name="robots" content="noindex">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/transition.js" defer></script>
+  <script src="js/theme.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/last-updated.js" defer></script>
+</head>
+<body class="fade-page">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <img src="assets/images/blacknationlogo.png" class="logo" alt="Black Nation MC logo">
+    </a>
+    <div class="title-block">
+      <h1>BLACK NATION MC</h1>
+      <h2 class="motto">BLACK FUCKEN NATION!</h2>
+    </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Search site">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+      <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </div>
+      </div>
+      <span class="theme-toggle-label">Light</span>
+    </button>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="header-divider"></div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="ranks.html">Ranks</a>
+    <a href="rules.html">Rules</a>
+    <a href="members.html" class="vault-highlight">Members Vault</a>
+  </nav>
+</header>
+
+<div class="site-search-overlay" id="searchOverlay">
+  <div class="site-search-box">
+    <div class="site-search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" class="site-search-icon"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="siteSearchInput" placeholder="Search the site…" autocomplete="off">
+      <button class="site-search-close" id="searchClose" aria-label="Close search">&times;</button>
+    </div>
+    <div class="site-search-results" id="siteSearchResults"></div>
+  </div>
+</div>
+
+<main>
+
+<section class="section notfound-section">
+  <div class="notfound-code">404</div>
+  <h3 class="notfound-heading">WRONG TURN, BROTHER</h3>
+  <p class="notfound-sub">That page doesn't exist, got moved, or you took a wrong turn on the run. Head back to known roads.</p>
+  <div class="notfound-actions">
+    <a href="index.html" class="btn-primary">Back to Home</a>
+    <button class="btn-ghost" id="notfoundSearchBtn" type="button">Search the site</button>
+  </div>
+  <div class="notfound-links">
+    <a href="about.html">About</a>
+    <a href="ranks.html">Ranks</a>
+    <a href="rules.html">Rules</a>
+    <a href="members.html">Members Vault</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand">
+      <img src="assets/images/blacknationlogo.png" alt="Black Nation MC logo">
+      BLACK NATION MC — EST 2025
+    </span>
+    <span class="footer-sep">•</span>
+    <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+    <span class="footer-sep">•</span>
+    <span class="footer-updated" id="footerUpdated"></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("notfoundSearchBtn")?.addEventListener("click", () => {
+    document.getElementById("searchToggle")?.click();
+  });
+</script>
+
+</body>
+</html>

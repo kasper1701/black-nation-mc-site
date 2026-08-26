@@ -7,9 +7,24 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Ranks — Black Nation MC</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- SEO / SOCIAL PREVIEW META — replace https://your-domain-here.example with your real domain -->
+  <meta name="description" content="Rank structure and chain of command for Black Nation MC.">
+  <link rel="canonical" href="https://your-domain-here.example/ranks.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ranks — Black Nation MC">
+  <meta property="og:description" content="Rank structure and chain of command for Black Nation MC.">
+  <meta property="og:image" content="assets/images/blacknationlogo.png">
+  <meta property="og:url" content="https://your-domain-here.example/ranks.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ranks — Black Nation MC">
+  <meta name="twitter:description" content="Rank structure and chain of command for Black Nation MC.">
+  <meta name="twitter:image" content="assets/images/blacknationlogo.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
   <script src="js/theme.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/last-updated.js" defer></script>
   </head>
 <body class="fade-page">
 
@@ -22,6 +37,9 @@
       <h1>BLACK NATION MC</h1>
       <h2 class="motto">BLACK FUCKEN NATION!</h2>
     </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Search site">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
       <div class="theme-toggle-track">
         <div class="theme-toggle-thumb">
@@ -44,6 +62,18 @@
     <a href="members.html" class="vault-highlight">Members Vault</a>
   </nav>
 </header>
+
+<div class="site-search-overlay" id="searchOverlay">
+  <div class="site-search-box">
+    <div class="site-search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" class="site-search-icon"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="siteSearchInput" placeholder="Search the site…" autocomplete="off">
+      <button class="site-search-close" id="searchClose" aria-label="Close search">&times;</button>
+    </div>
+    <div class="site-search-results" id="siteSearchResults"></div>
+  </div>
+</div>
+
 
 <main>
 
@@ -208,6 +238,8 @@
     </span>
     <span class="footer-sep">•</span>
     <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+    <span class="footer-sep">•</span>
+    <span class="footer-updated" id="footerUpdated"></span>
   </div>
 </footer>
 

@@ -2,13 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Members Vault — Black Nation MC</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- SEO / SOCIAL PREVIEW META — replace https://your-domain-here.example with your real domain -->
+  <meta name="description" content="Members-only vault for Black Nation MC club resources.">
+  <link rel="canonical" href="https://your-domain-here.example/members.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Members Vault — Black Nation MC">
+  <meta property="og:description" content="Members-only vault for Black Nation MC club resources.">
+  <meta property="og:image" content="assets/images/blacknationlogo.png">
+  <meta property="og:url" content="https://your-domain-here.example/members.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Members Vault — Black Nation MC">
+  <meta name="twitter:description" content="Members-only vault for Black Nation MC club resources.">
+  <meta name="twitter:image" content="assets/images/blacknationlogo.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
   <script src="js/vault.js" defer></script>
   <script src="js/theme.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/last-updated.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+  <script src="js/copy.js" defer></script>
   </head>
 <body class="fade-page">
 
@@ -21,6 +40,9 @@
       <h1>BLACK NATION MC</h1>
       <h2 class="motto">BLACK FUCKEN NATION!</h2>
     </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Search site">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
       <div class="theme-toggle-track">
         <div class="theme-toggle-thumb">
@@ -43,6 +65,18 @@
     <a href="members.html" class="active vault-highlight">Members Vault</a>
   </nav>
 </header>
+
+<div class="site-search-overlay" id="searchOverlay">
+  <div class="site-search-box">
+    <div class="site-search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" class="site-search-icon"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="siteSearchInput" placeholder="Search the site…" autocomplete="off">
+      <button class="site-search-close" id="searchClose" aria-label="Close search">&times;</button>
+    </div>
+    <div class="site-search-results" id="siteSearchResults"></div>
+  </div>
+</div>
+
 
 <main>
 
@@ -99,10 +133,10 @@
 <section class="section roster-section">
   <h3>ROSTER</h3>
   <div class="roster-large">
-    <img loading="lazy" src="assets/images/roster1.jpg" alt="Black Nation roster 1">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="roster" src="assets/images/roster1.jpg" alt="Black Nation roster 1">
   </div>
   <div class="roster-large">
-    <img loading="lazy" src="assets/images/roster2.jpg" alt="Black Nation roster 2">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="roster" src="assets/images/roster2.jpg" alt="Black Nation roster 2">
   </div>
 </section>
 
@@ -129,6 +163,10 @@
               <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h.879a1.5 1.5 0 0 1 1.394.944l.738 1.847a1.5 1.5 0 0 1-.34 1.637l-.554.554a9.042 9.042 0 0 0 4.4 4.4l.555-.554a1.5 1.5 0 0 1 1.636-.34l1.848.738A1.5 1.5 0 0 1 18 12.622V13.5A1.5 1.5 0 0 1 16.5 15C8.492 15 2 8.508 2 .5V3.5z" fill="currentColor"/>
             </svg>
             <p id="rank-phone" class="mv-phone">022 764 0431</p>
+            <button class="copy-btn" id="mvPhoneCopy" type="button" aria-label="Copy phone number">
+              <svg class="copy-icon-copy" viewBox="0 0 20 20" fill="none"><rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 13V4.5A1.5 1.5 0 0 1 5.5 3H13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg class="copy-icon-check" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -142,7 +180,7 @@
       <div class="mv-progress-track">
         <div class="mv-progress-bar" id="mvProgress"></div>
       </div>
-      <div class="mv-counter"><span id="mvCurrent">1</span> / <span id="mvTotal">16</span></div>
+      <div class="mv-counter"><span id="mvCurrent">1</span> / <span id="mvTotal">9</span></div>
     </div>
 
     <div class="mv-dots-row" id="mvDotsRow"></div>
@@ -152,15 +190,42 @@
 <section class="section">
   <h3>MEMBERS</h3>
   <div class="members-grid">
-    <div class="member-card"><p><b>Daquavion Rangateti</b></p><p>President</p><p>022 764 0431</p></div>
-    <div class="member-card"><p><b>Denero Rangateti</b></p><p>Vice President</p><p>021 344 0513</p></div>
-    <div class="member-card"><p><b>Weston Kopara</b></p><p>SGT of Arms</p><p>027 714 2738</p></div>
-    <div class="member-card"><p><b>Danehura Rangateti</b></p><p>Treasurer</p><p>022 990 0359</p></div>
-    <div class="member-card"><p><b>Rangi Tatoe</b></p><p>Road Captain</p><p>021 148 2254</p></div>
-    <div class="member-card"><p><b>Queenie Rangateti</b></p><p>Queen</p><p>022 990 0359</p></div>
-    <div class="member-card"><p><b>Tama TeRangi</b></p><p>Life Member</p><p>022 708 7922</p></div>
-    <div class="member-card"><p><b>Wiremu Terangi</b></p><p>Hangi</p><p>WIP</p></div>
-    <div class="member-card"><p><b>Zephyr Lafaungi</b></p><p>Hangi</p><p>WIP</p></div>
+    <div class="member-card">
+      <p><b>Daquavion Rangateti</b></p><p>President</p>
+      <div class="member-phone-row"><p class="member-phone">022 764 0431</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Denero Rangateti</b></p><p>Vice President</p>
+      <div class="member-phone-row"><p class="member-phone">021 344 0513</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Weston Kopara</b></p><p>SGT of Arms</p>
+      <div class="member-phone-row"><p class="member-phone">027 714 2738</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Danehura Rangateti</b></p><p>Treasurer</p>
+      <div class="member-phone-row"><p class="member-phone">022 990 0359</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Rangi Tatoe</b></p><p>Road Captain</p>
+      <div class="member-phone-row"><p class="member-phone">021 148 2254</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Queenie Rangateti</b></p><p>Queen</p>
+      <div class="member-phone-row"><p class="member-phone">022 990 0359</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Tama TeRangi</b></p><p>Life Member</p>
+      <div class="member-phone-row"><p class="member-phone">022 708 7922</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Wiremu Terangi</b></p><p>Hangi</p>
+      <div class="member-phone-row"><p class="member-phone">WIP</p></div>
+    </div>
+    <div class="member-card">
+      <p><b>Zephyr Lafaungi</b></p><p>Hangi</p>
+      <div class="member-phone-row"><p class="member-phone">WIP</p></div>
+    </div>
 
   </div>
 </section>
@@ -176,8 +241,8 @@
 <section class="section">
   <h3>PROPERTIES</h3>
   <div class="property-grid">
-    <div class="property-card"><img loading="lazy" src="assets/images/property1.jpg"><p>Main Pad (587 - Mirror Park Blvd)</p></div>
-    <div class="property-card"><img loading="lazy" src="assets/images/property2.jpg"><p>Clothing Factory (764 - Vespucci Blvd)</p></div>
+    <div class="property-card"><img loading="lazy" class="lightbox-img" data-lightbox-group="properties" src="assets/images/property1.jpg" alt="Main Pad"><p>Main Pad (587 - Mirror Park Blvd)</p></div>
+    <div class="property-card"><img loading="lazy" class="lightbox-img" data-lightbox-group="properties" src="assets/images/property2.jpg" alt="Clothing Factory"><p>Clothing Factory (764 - Vespucci Blvd)</p></div>
   </div>
 </section>
 
@@ -200,6 +265,8 @@
     </span>
     <span class="footer-sep">•</span>
     <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+    <span class="footer-sep">•</span>
+    <span class="footer-updated" id="footerUpdated"></span>
   </div>
 </footer>
 

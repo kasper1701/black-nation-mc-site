@@ -7,10 +7,25 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Black Nation MC</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- SEO / SOCIAL PREVIEW META — replace https://your-domain-here.example with your real domain -->
+  <meta name="description" content="Official site of Black Nation MC — loyalty, discipline, and brotherhood. A fictional roleplay motorcycle club.">
+  <link rel="canonical" href="https://your-domain-here.example/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Black Nation MC">
+  <meta property="og:description" content="Official site of Black Nation MC — loyalty, discipline, and brotherhood. A fictional roleplay motorcycle club.">
+  <meta property="og:image" content="assets/images/blacknationlogo.png">
+  <meta property="og:url" content="https://your-domain-here.example/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Black Nation MC">
+  <meta name="twitter:description" content="Official site of Black Nation MC — loyalty, discipline, and brotherhood. A fictional roleplay motorcycle club.">
+  <meta name="twitter:image" content="assets/images/blacknationlogo.png">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/light-mode.css">
   <script src="js/transition.js" defer></script>
   <script src="js/theme.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/last-updated.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
   <style>
     html.theme-transitioning,
     html.theme-transitioning *,
@@ -42,6 +57,9 @@
       <h1>BLACK NATION MC</h1>
       <h2 class="motto">BLACK FUCKEN NATION!</h2>
     </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Search site">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
       <div class="theme-toggle-track">
         <div class="theme-toggle-thumb">
@@ -64,6 +82,18 @@
     <a href="members.html" class="vault-highlight">Members Vault</a>
   </nav>
 </header>
+
+<div class="site-search-overlay" id="searchOverlay">
+  <div class="site-search-box">
+    <div class="site-search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" class="site-search-icon"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="siteSearchInput" placeholder="Search the site…" autocomplete="off">
+      <button class="site-search-close" id="searchClose" aria-label="Close search">&times;</button>
+    </div>
+    <div class="site-search-results" id="siteSearchResults"></div>
+  </div>
+</div>
+
 
 <main>
 
@@ -98,7 +128,7 @@
 <section class="news-section">
   <h3>BLACK NATION INGAME NEWS</h3>
   <div class="news-content">
-    <p style="color: #cc2222;">
+    <p class="news-alert-text">
       New MC MLO for our main pad @587 
       <br><br>
       Locks all through out our new pad
@@ -126,10 +156,10 @@
 <section class="section">
   <h3>PHOTOS</h3>
   <div class="gallery-grid">
-    <img loading="lazy" src="assets/images/photo1.jpg" alt="Black Nation 1">
-    <img loading="lazy" src="assets/images/photo2.jpg" alt="Black Nation 2">
-    <img loading="lazy" src="assets/images/photo3.jpg" alt="Black Nation 3">
-    <img loading="lazy" src="assets/images/photo4.jpg" alt="Black Nation 4">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="gallery" src="assets/images/photo1.jpg" alt="Black Nation 1">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="gallery" src="assets/images/photo2.jpg" alt="Black Nation 2">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="gallery" src="assets/images/photo3.jpg" alt="Black Nation 3">
+    <img loading="lazy" class="lightbox-img" data-lightbox-group="gallery" src="assets/images/photo4.jpg" alt="Black Nation 4">
   </div>
 </section>
 
@@ -144,7 +174,7 @@
       The circle stays tight. The business stays in house.
       You earn your place, you keep your place.
     </p>
-    <a href="about.html" class="link-inline" style="color:#00148C;">Read More →</a>
+    <a href="about.html" class="link-inline">Read More →</a>
   </div>
   <div class="section-block">
     <h3>VALUES</h3>
@@ -168,6 +198,8 @@
     </span>
     <span class="footer-sep">•</span>
     <span class="disclaimer">This content is entirely fictional and created for roleplay purposes only.</span>
+    <span class="footer-sep">•</span>
+    <span class="footer-updated" id="footerUpdated"></span>
   </div>
 </footer>
 
