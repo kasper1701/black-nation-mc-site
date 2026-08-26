@@ -7,15 +7,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Rules — Black Nation MC</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/images/blacknationlogo.png">
 
-  <!-- SEO / SOCIAL PREVIEW META — replace https://your-domain-here.example with your real domain -->
+  <!-- SEO / SOCIAL PREVIEW META — replace https://blacknationmc.site with your real domain -->
   <meta name="description" content="Official club rules, punishments, and code of conduct for Black Nation MC.">
-  <link rel="canonical" href="https://your-domain-here.example/rules.html">
+  <link rel="canonical" href="https://blacknationmc.site/rules.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rules — Black Nation MC">
   <meta property="og:description" content="Official club rules, punishments, and code of conduct for Black Nation MC.">
   <meta property="og:image" content="assets/images/blacknationlogo.png">
-  <meta property="og:url" content="https://your-domain-here.example/rules.html">
+  <meta property="og:url" content="https://blacknationmc.site/rules.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Rules — Black Nation MC">
   <meta name="twitter:description" content="Official club rules, punishments, and code of conduct for Black Nation MC.">
@@ -23,8 +25,10 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/transition.js" defer></script>
   <script src="js/theme.js"></script>
+  <script src="js/pwa.js" defer></script>
   <script src="js/search.js" defer></script>
   <script src="js/last-updated.js" defer></script>
+  <script src="js/share.js" defer></script>
   <style>
   .auth-toggle {
     display: flex; align-items: center; justify-content: center;
@@ -70,7 +74,7 @@
     </div>
     <button class="search-toggle" id="searchToggle" aria-label="Search site">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
+    <button class="share-toggle" id="shareToggle" aria-label="Share this page">\n      <svg viewBox="0 0 24 24" fill="none" class="share-icon-default"><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>\n      <svg viewBox="0 0 24 24" fill="none" class="share-icon-done"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>\n    </button>
     <a href="login.html" class="auth-toggle" id="authToggle" aria-label="Log In">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </a>

@@ -2225,12 +2225,29 @@ main {
 /* ─── VP — slightly narrower ─────────────────────────────────────────────────── */
 .rk-tier--exec { width: 100%; max-width: 380px; }
 
+/* ─── Exec row (VP + Sgt At Arms, grouped with President) ───────────────────── */
+.rk-tier--execrow { width: 100%; }
+.rk-exec-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+}
+@media (max-width: 700px) {
+  .rk-exec-row { grid-template-columns: 1fr; }
+}
+
 /* ─── Officers row ───────────────────────────────────────────────────────────── */
 .rk-officers-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   width: 100%;
+}
+.rk-officers-row--two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 700px;
 }
 @media (max-width: 700px) {
   .rk-officers-row { grid-template-columns: 1fr; }
@@ -3203,8 +3220,10 @@ html.theme-transitioning .vault-icon-ring {
   box-shadow: 0 0 12px rgba(0,20,140,0.3);
   color: var(--text-strong);
 }
-/* theme toggle no longer needs to self-push right — search-toggle does it */
-.search-toggle + .theme-toggle {
+/* theme toggle no longer needs to self-push right — search-toggle does it.
+   (Share/auth buttons now sit between them, so this can't rely on the
+   adjacent-sibling selector any more — override directly instead.) */
+.theme-toggle {
   margin-left: 0;
 }
 
@@ -3433,8 +3452,10 @@ html.theme-transitioning .vault-icon-ring {
 
 @media (max-width: 360px) {
   .search-toggle { order: 3; margin-left: 0; }
-  .theme-toggle  { order: 4; }
-  .nav-toggle    { order: 5; }
+  .share-toggle  { order: 4; }
+  .auth-toggle   { order: 5; }
+  .theme-toggle  { order: 6; }
+  .nav-toggle    { order: 7; }
 }
 
 /* ================================================
@@ -3598,3 +3619,186 @@ html.theme-transitioning .vault-icon-ring {
 }
 
 .mv-phone-row .copy-btn { margin-left: 4px; }
+
+/* ================================================
+   PRINT STYLESHEET
+   ================================================
+   Aimed mainly at the rules page — strips glow/background effects,
+   forces black-on-white, and hides anything only useful on-screen
+   (nav, search, theme/auth toggles, footer chrome, decorative bits).
+*/
+@media print {
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    background-image: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body::before, body::after { display: none !important; }
+
+  .header, .footer,
+  .nav-toggle, .theme-toggle, .search-toggle, .auth-toggle, .share-toggle,
+  .site-search-overlay, .lightbox-overlay,
+  .btn-primary, .btn-ghost,
+  .mv-nav-btn, .mv-dots-row, .mv-progress-wrap,
+  .copy-btn, .vault-gate-wrap {
+    display: none !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .section {
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 0 18px !important;
+    margin: 0 0 18px !important;
+    page-break-inside: avoid;
+  }
+
+  .section h3 {
+    color: #000 !important;
+    border-bottom: 1px solid #999 !important;
+  }
+
+  .rules-hero-sub,
+  .section-sub,
+  .pillar-rules p,
+  .nr-item p,
+  .rules-final-statement p,
+  .server-rules-note p {
+    color: #111 !important;
+  }
+
+  .rules-main-title,
+  .rules-section-title,
+  .pillar-title {
+    color: #000 !important;
+  }
+
+  .nr-item {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    padding: 8px 0 !important;
+  }
+  .nr-item--warning {
+    border-left: 3px solid #900 !important;
+    padding-left: 10px !important;
+  }
+  .nr-item--warning p { color: #900 !important; }
+
+  .pillar-card {
+    border: 1px solid #ccc !important;
+    background: none !important;
+    break-inside: avoid;
+  }
+  .pillar-icon svg, .rules-section-num, .rk-tier-num {
+    color: #000 !important;
+    opacity: 1 !important;
+  }
+
+  .punishment-split { border: 1px solid #ccc !important; }
+  .punishment-tier { background: none !important; }
+  .punishment-minor .punishment-tier-label,
+  .punishment-major .punishment-tier-label {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+
+  .server-rules-note {
+    border: 1px solid #999 !important;
+    background: none !important;
+  }
+
+  .rules-moto-text, .rules-final-sig { color: #000 !important; }
+
+  .rules-final-section::after {
+    content: "Black Nation MC — printed reference copy. Content is fictional and for roleplay purposes only.";
+    display: block;
+    margin-top: 24px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+  }
+}
+
+/* ================================================
+   SHARE BUTTON
+   ================================================ */
+.share-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, color 0.22s ease;
+}
+.share-toggle svg { width: 18px; height: 18px; }
+.share-toggle:hover {
+  background: rgba(0,20,140,0.18);
+  border-color: rgba(0,20,140,0.45);
+  box-shadow: 0 0 12px rgba(0,20,140,0.3);
+  color: var(--text-strong);
+}
+.share-icon-done { display: none; }
+.share-toggle.copied .share-icon-default { display: none; }
+.share-toggle.copied .share-icon-done { display: block; }
+.share-toggle.copied {
+  color: #3ddc71;
+  border-color: rgba(61,220,113,0.5);
+  background: rgba(61,220,113,0.1);
+}
+.share-toggle.copied::after {
+  content: "Link copied!";
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #111;
+  color: #3ddc71;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  border: 1px solid rgba(61,220,113,0.3);
+  z-index: 10;
+}
+
+[data-theme="light"] .share-toggle {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.1);
+  color: #333;
+}
+[data-theme="light"] .share-toggle:hover {
+  background: rgba(0,20,140,0.1);
+  border-color: rgba(0,20,140,0.35);
+  color: #00148C;
+}
+[data-theme="light"] .share-toggle.copied {
+  background: rgba(0,150,60,0.1);
+  border-color: rgba(0,150,60,0.4);
+  color: #0a7a34;
+}
+
+@media (max-width: 420px) {
+  .share-toggle { width: 34px; height: 34px; }
+  .share-toggle svg { width: 16px; height: 16px; }
+}
